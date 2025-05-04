@@ -8,19 +8,22 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.Data.SqlClient;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace ProyectoBD
 {
     public partial class F_InicioSesion : Form
     {
 
-        static string connectionString = "Data Source=(localdb)\\MyLocalDB;Initial Catalog=BD_Inventario;Integrated Security=True";
+        string connectionString = "Data Source=(localdb)\\MyLocalDB;Initial Catalog=BD_Inventario;Integrated Security=True";
         int contadorIntentos = 0;
 
 
         public F_InicioSesion()
         {
             InitializeComponent();
+            B_InicioSesion.Enabled = false;
+
         }
 
         private void F_InicioSesion_Load(object sender, EventArgs e)
@@ -28,9 +31,22 @@ namespace ProyectoBD
 
         }
 
+        public bool ValidarCampos()
+        {
+            if (!string.IsNullOrWhiteSpace(TB_contraseña.Text) && !string.IsNullOrWhiteSpace(TB_email.Text))
+            {
+                B_InicioSesion.Enabled = true;
+                return true;
+            }
+            else
+            {
+                B_InicioSesion.Enabled = false;
+                return false;
+            }
+        }
 
         public bool ValidarCredenciales()
-        {
+       {
             string email_form = TB_email.Text.Trim();
             string contraseña_form = TB_contraseña.Text;
             bool credencialesValidas = false;
@@ -53,13 +69,13 @@ namespace ProyectoBD
                     MessageBox.Show("Error al validar credenciales: " + ex.Message);
                 }
             }
-            return credencialesValidas;
 
+            return credencialesValidas;
         }
 
         private void TB_email_TextChanged(object sender, EventArgs e)
         {
-
+            ValidarCampos();
         }
 
         private void B_InicioSesion_Click(object sender, EventArgs e)
@@ -97,6 +113,11 @@ namespace ProyectoBD
                     timer.Start();
                 }
             }
+        }
+
+        private void TB_contraseña_TextChanged(object sender, EventArgs e)
+        {
+            ValidarCampos();
         }
     }
 }

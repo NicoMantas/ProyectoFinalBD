@@ -3,12 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\nicol\\OneDrive - UPB\\Quinto Semestre\\BD\\Final\\ProyectoBD\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{87526D24-9DD3-45F7-B327-A70EB4D3F1DC}|ProyectoBD.csproj|C:\\Users\\nicol\\OneDrive - UPB\\Quinto Semestre\\BD\\Final\\ProyectoBD\\inicio_sesion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{87526D24-9DD3-45F7-B327-A70EB4D3F1DC}|ProyectoBD.csproj|solutionrelative:inicio_sesion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{87526D24-9DD3-45F7-B327-A70EB4D3F1DC}|ProyectoBD.csproj|c:\\users\\nicol\\onedrive - upb\\quinto semestre\\bd\\final\\proyectobd\\inicio_sesion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{87526D24-9DD3-45F7-B327-A70EB4D3F1DC}|ProyectoBD.csproj|solutionrelative:inicio_sesion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{87526D24-9DD3-45F7-B327-A70EB4D3F1DC}|ProyectoBD.csproj|c:\\users\\nicol\\onedrive - upb\\quinto semestre\\bd\\final\\proyectobd\\properties\\settings.settings||{6D2695F9-5365-4A78-89ED-F205C045BFE6}",
+      "RelativeMoniker": "D:0:0:{87526D24-9DD3-45F7-B327-A70EB4D3F1DC}|ProyectoBD.csproj|solutionrelative:properties\\settings.settings||{6D2695F9-5365-4A78-89ED-F205C045BFE6}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{87526D24-9DD3-45F7-B327-A70EB4D3F1DC}|ProyectoBD.csproj|c:\\users\\nicol\\onedrive - upb\\quinto semestre\\bd\\final\\proyectobd\\proyectobd.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
+      "RelativeMoniker": "D:0:0:{87526D24-9DD3-45F7-B327-A70EB4D3F1DC}|ProyectoBD.csproj|solutionrelative:proyectobd.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{87526D24-9DD3-45F7-B327-A70EB4D3F1DC}|ProyectoBD.csproj|c:\\users\\nicol\\onedrive - upb\\quinto semestre\\bd\\final\\proyectobd\\inicio_sesion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{87526D24-9DD3-45F7-B327-A70EB4D3F1DC}|ProyectoBD.csproj|solutionrelative:inicio_sesion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -31,19 +39,43 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "Settings.settings",
+              "DocumentMoniker": "C:\\Users\\nicol\\OneDrive - UPB\\Quinto Semestre\\BD\\Final\\ProyectoBD\\Properties\\Settings.settings",
+              "RelativeDocumentMoniker": "Properties\\Settings.settings",
+              "ToolTip": "C:\\Users\\nicol\\OneDrive - UPB\\Quinto Semestre\\BD\\Final\\ProyectoBD\\Properties\\Settings.settings",
+              "RelativeToolTip": "Properties\\Settings.settings",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002767|",
+              "WhenOpened": "2025-05-04T02:59:59.329Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ProyectoBD",
+              "DocumentMoniker": "C:\\Users\\nicol\\OneDrive - UPB\\Quinto Semestre\\BD\\Final\\ProyectoBD\\ProyectoBD.csproj",
+              "RelativeDocumentMoniker": "ProyectoBD.csproj",
+              "ToolTip": "C:\\Users\\nicol\\OneDrive - UPB\\Quinto Semestre\\BD\\Final\\ProyectoBD\\ProyectoBD.csproj",
+              "RelativeToolTip": "ProyectoBD.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-05-04T02:59:52.11Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
               "Title": "Inicio_Sesion.cs",
               "DocumentMoniker": "C:\\Users\\nicol\\OneDrive - UPB\\Quinto Semestre\\BD\\Final\\ProyectoBD\\Inicio_Sesion.cs",
               "RelativeDocumentMoniker": "Inicio_Sesion.cs",
               "ToolTip": "C:\\Users\\nicol\\OneDrive - UPB\\Quinto Semestre\\BD\\Final\\ProyectoBD\\Inicio_Sesion.cs",
               "RelativeToolTip": "Inicio_Sesion.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEQAAAAsAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-03T04:19:49.759Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": "Inicio_Sesion.cs [Dise\u00F1o]",
               "DocumentMoniker": "C:\\Users\\nicol\\OneDrive - UPB\\Quinto Semestre\\BD\\Final\\ProyectoBD\\Inicio_Sesion.cs",
               "RelativeDocumentMoniker": "Inicio_Sesion.cs",

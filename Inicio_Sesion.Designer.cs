@@ -50,6 +50,7 @@
             TB_contraseña.Name = "TB_contraseña";
             TB_contraseña.Size = new Size(395, 31);
             TB_contraseña.TabIndex = 1;
+            TB_contraseña.TextChanged += TB_contraseña_TextChanged;
             // 
             // label1
             // 
