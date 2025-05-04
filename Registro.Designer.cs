@@ -115,6 +115,7 @@
             TB_Cedula.Name = "TB_Cedula";
             TB_Cedula.Size = new Size(351, 31);
             TB_Cedula.TabIndex = 7;
+            TB_Cedula.TextChanged += TB_Cedula_TextChanged;
             // 
             // TB_Nombre
             // 
@@ -122,6 +123,7 @@
             TB_Nombre.Name = "TB_Nombre";
             TB_Nombre.Size = new Size(350, 31);
             TB_Nombre.TabIndex = 8;
+            TB_Nombre.TextChanged += TB_Nombre_TextChanged;
             // 
             // TB_Contraseña
             // 
@@ -129,6 +131,7 @@
             TB_Contraseña.Name = "TB_Contraseña";
             TB_Contraseña.Size = new Size(351, 31);
             TB_Contraseña.TabIndex = 9;
+            TB_Contraseña.TextChanged += TB_Contraseña_TextChanged;
             // 
             // TB_Telefono
             // 
@@ -136,6 +139,7 @@
             TB_Telefono.Name = "TB_Telefono";
             TB_Telefono.Size = new Size(350, 31);
             TB_Telefono.TabIndex = 10;
+            TB_Telefono.TextChanged += TB_Telefono_TextChanged;
             // 
             // TB_Email
             // 
@@ -143,6 +147,7 @@
             TB_Email.Name = "TB_Email";
             TB_Email.Size = new Size(383, 31);
             TB_Email.TabIndex = 11;
+            TB_Email.TextChanged += TB_Email_TextChanged;
             // 
             // CB_Rol
             // 

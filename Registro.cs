@@ -58,12 +58,12 @@ namespace ProyectoBD
 
         public bool CrearPersona()
         {
-            int cedula_form;
-            int telefono_form;
+            long cedula_form;
+            long telefono_form;
 
             // Validar conversiones
-            if (!int.TryParse(TB_Cedula.Text.Trim(), out cedula_form) ||
-                !int.TryParse(TB_Telefono.Text.Trim(), out telefono_form))
+            if (!long.TryParse(TB_Cedula.Text.Trim(), out cedula_form) ||
+                !long.TryParse(TB_Telefono.Text.Trim(), out telefono_form))
             {
                 MessageBox.Show("Cédula o teléfono no son números válidos.");
                 return false;
@@ -81,15 +81,17 @@ namespace ProyectoBD
                     conn.Open();
 
                     // Primero validamos si ya existe ese email
-                    string queryVerificar = "SELECT COUNT(*) FROM Persona WHERE Email = @Email";
+                    string queryVerificar = "SELECT COUNT(*) FROM Persona WHERE Cedula = @IdPersona, Email = @Email, Telefono = @Telefono";
                     SqlCommand cmdVerificar = new SqlCommand(queryVerificar, conn);
+                    cmdVerificar.Parameters.AddWithValue("@IdPersona", cedula_form);
                     cmdVerificar.Parameters.AddWithValue("@Email", email_form);
+                    cmdVerificar.Parameters.AddWithValue("@Telefono", telefono_form);
 
                     int count = (int)cmdVerificar.ExecuteScalar();
 
                     if (count > 0)
                     {
-                        MessageBox.Show("Este correo ya está registrado.");
+                        MessageBox.Show("Esta cedula, telefono o correo ya están registrados.");
                         return false;
                     }
 
@@ -125,7 +127,6 @@ namespace ProyectoBD
                 }
             }
         }
-
 
         public bool ValidarCampos()
         {
@@ -181,6 +182,31 @@ namespace ProyectoBD
             {
                 MessageBox.Show("Por favor complete todos los campos antes de continuar.", "Campos incompletos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+        }
+
+        private void TB_Cedula_TextChanged(object sender, EventArgs e)
+        {
+            ValidarCampos();
+        }
+
+        private void TB_Nombre_TextChanged(object sender, EventArgs e)
+        {
+            ValidarCampos();
+        }
+
+        private void TB_Contraseña_TextChanged(object sender, EventArgs e)
+        {
+            ValidarCampos();
+        }
+
+        private void TB_Telefono_TextChanged(object sender, EventArgs e)
+        {
+            ValidarCampos();
+        }
+
+        private void TB_Email_TextChanged(object sender, EventArgs e)
+        {
+            ValidarCampos();
         }
     }
 }
