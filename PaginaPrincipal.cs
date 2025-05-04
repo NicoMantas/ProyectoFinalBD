@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace ProyectoBD
 {
-    public partial class PaginaPrincipal: Form
+    public partial class F_PaginaPrincipal: Form
     {
-        public PaginaPrincipal()
+        public F_PaginaPrincipal()
         {
             InitializeComponent();
         }

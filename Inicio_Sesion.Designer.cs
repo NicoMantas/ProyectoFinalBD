@@ -34,6 +34,7 @@
             label2 = new Label();
             label3 = new Label();
             B_InicioSesion = new Button();
+            CB_VerContraseña = new CheckBox();
             SuspendLayout();
             // 
             // TB_email
@@ -50,6 +51,7 @@
             TB_contraseña.Name = "TB_contraseña";
             TB_contraseña.Size = new Size(395, 31);
             TB_contraseña.TabIndex = 1;
+            TB_contraseña.UseSystemPasswordChar = true;
             TB_contraseña.TextChanged += TB_contraseña_TextChanged;
             // 
             // label1
@@ -92,11 +94,22 @@
             B_InicioSesion.UseVisualStyleBackColor = true;
             B_InicioSesion.Click += B_InicioSesion_Click;
             // 
+            // CB_VerContraseña
+            // 
+            CB_VerContraseña.AutoSize = true;
+            CB_VerContraseña.Location = new Point(521, 204);
+            CB_VerContraseña.Name = "CB_VerContraseña";
+            CB_VerContraseña.Size = new Size(22, 21);
+            CB_VerContraseña.TabIndex = 6;
+            CB_VerContraseña.UseVisualStyleBackColor = true;
+            CB_VerContraseña.CheckedChanged += CB_VerContraseña_CheckedChanged;
+            // 
             // F_InicioSesion
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(642, 405);
+            Controls.Add(CB_VerContraseña);
             Controls.Add(B_InicioSesion);
             Controls.Add(label3);
             Controls.Add(label2);
@@ -117,5 +130,6 @@
         private Label label3;
         private Button B_InicioSesion;
         public TextBox TB_email;
+        private CheckBox CB_VerContraseña;
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace ProyectoBD
 {
-    partial class PaginaPrincipal
+    partial class F_PaginaPrincipal
     {
         /// <summary>
         /// Required designer variable.
@@ -28,10 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "PaginaPrincipal";
+            SuspendLayout();
+            // 
+            // F_PaginaPrincipal
+            // 
+            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(800, 450);
+            Name = "F_PaginaPrincipal";
+            Text = "PaginaPrincipal";
+            ResumeLayout(false);
         }
 
         #endregion

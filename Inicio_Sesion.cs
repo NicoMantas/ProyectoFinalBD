@@ -46,7 +46,7 @@ namespace ProyectoBD
         }
 
         public bool ValidarCredenciales()
-       {
+        {
             string email_form = TB_email.Text.Trim();
             string contraseña_form = TB_contraseña.Text;
             bool credencialesValidas = false;
@@ -83,6 +83,10 @@ namespace ProyectoBD
             if (ValidarCredenciales())
             {
                 MessageBox.Show("Bienvenido");
+                F_PaginaPrincipal menu = new F_PaginaPrincipal(); // Crear instancia del siguiente form
+                menu.Show(); // Mostrar el nuevo formulario
+
+                this.Hide(); // Ocultar el formulario actual (opcional)
                 // Aquí puedes continuar con el siguiente formulario o lógica
                 contadorIntentos = 0; // Reiniciar en caso de éxito
             }
@@ -118,6 +122,11 @@ namespace ProyectoBD
         private void TB_contraseña_TextChanged(object sender, EventArgs e)
         {
             ValidarCampos();
+        }
+
+        private void CB_VerContraseña_CheckedChanged(object sender, EventArgs e)
+        {
+            TB_contraseña.UseSystemPasswordChar = !CB_VerContraseña.Checked;
         }
     }
 }
