@@ -91,7 +91,7 @@
             DGV_DatosPersonal.Location = new Point(3, 5);
             DGV_DatosPersonal.Name = "DGV_DatosPersonal";
             DGV_DatosPersonal.RowHeadersWidth = 62;
-            DGV_DatosPersonal.Size = new Size(824, 471);
+            DGV_DatosPersonal.Size = new Size(847, 471);
             DGV_DatosPersonal.TabIndex = 0;
             // 
             // B_Personas
@@ -150,6 +150,7 @@
             B_Proveedores.TabIndex = 7;
             B_Proveedores.Text = "Proveedores";
             B_Proveedores.UseVisualStyleBackColor = true;
+            B_Proveedores.Click += B_Proveedores_Click;
             // 
             // button1
             // 
@@ -159,6 +160,7 @@
             button1.TabIndex = 8;
             button1.Text = "Categorias";
             button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // F_PaginaPrincipal
             // 

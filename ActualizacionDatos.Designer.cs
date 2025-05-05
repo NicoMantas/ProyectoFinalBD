@@ -36,11 +36,11 @@
             label6 = new Label();
             B_Cancelar = new Button();
             B_GuardarActualizacionPersona = new Button();
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
-            textBox3 = new TextBox();
-            textBox4 = new TextBox();
-            comboBox1 = new ComboBox();
+            TB_Cedula = new TextBox();
+            TB_Nombre = new TextBox();
+            TB_Telefono = new TextBox();
+            TB_Email = new TextBox();
+            CB_Rol = new ComboBox();
             SuspendLayout();
             // 
             // label1
@@ -85,9 +85,9 @@
             label5.AutoSize = true;
             label5.Location = new Point(38, 265);
             label5.Name = "label5";
-            label5.Size = new Size(66, 25);
+            label5.Size = new Size(54, 25);
             label5.TabIndex = 4;
-            label5.Text = "Correo";
+            label5.Text = "Email";
             // 
             // label6
             // 
@@ -107,6 +107,7 @@
             B_Cancelar.TabIndex = 6;
             B_Cancelar.Text = "Cancelar";
             B_Cancelar.UseVisualStyleBackColor = true;
+            B_Cancelar.Click += B_Cancelar_Click;
             // 
             // B_GuardarActualizacionPersona
             // 
@@ -116,53 +117,54 @@
             B_GuardarActualizacionPersona.TabIndex = 7;
             B_GuardarActualizacionPersona.Text = "Actualizar";
             B_GuardarActualizacionPersona.UseVisualStyleBackColor = true;
+            B_GuardarActualizacionPersona.Click += B_GuardarActualizacionPersona_Click;
             // 
-            // textBox1
+            // TB_Cedula
             // 
-            textBox1.Location = new Point(133, 103);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(370, 31);
-            textBox1.TabIndex = 8;
+            TB_Cedula.Location = new Point(133, 103);
+            TB_Cedula.Name = "TB_Cedula";
+            TB_Cedula.Size = new Size(370, 31);
+            TB_Cedula.TabIndex = 8;
             // 
-            // textBox2
+            // TB_Nombre
             // 
-            textBox2.Location = new Point(124, 161);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(384, 31);
-            textBox2.TabIndex = 9;
+            TB_Nombre.Location = new Point(124, 161);
+            TB_Nombre.Name = "TB_Nombre";
+            TB_Nombre.Size = new Size(384, 31);
+            TB_Nombre.TabIndex = 9;
             // 
-            // textBox3
+            // TB_Telefono
             // 
-            textBox3.Location = new Point(130, 213);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(376, 31);
-            textBox3.TabIndex = 10;
+            TB_Telefono.Location = new Point(130, 213);
+            TB_Telefono.Name = "TB_Telefono";
+            TB_Telefono.Size = new Size(376, 31);
+            TB_Telefono.TabIndex = 10;
             // 
-            // textBox4
+            // TB_Email
             // 
-            textBox4.Location = new Point(120, 265);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(390, 31);
-            textBox4.TabIndex = 11;
+            TB_Email.Location = new Point(120, 265);
+            TB_Email.Name = "TB_Email";
+            TB_Email.Size = new Size(390, 31);
+            TB_Email.TabIndex = 11;
             // 
-            // comboBox1
+            // CB_Rol
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(98, 324);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(250, 33);
-            comboBox1.TabIndex = 12;
+            CB_Rol.FormattingEnabled = true;
+            CB_Rol.Location = new Point(98, 324);
+            CB_Rol.Name = "CB_Rol";
+            CB_Rol.Size = new Size(250, 33);
+            CB_Rol.TabIndex = 12;
             // 
             // F_ActualizacionDatos
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(605, 497);
-            Controls.Add(comboBox1);
-            Controls.Add(textBox4);
-            Controls.Add(textBox3);
-            Controls.Add(textBox2);
-            Controls.Add(textBox1);
+            Controls.Add(CB_Rol);
+            Controls.Add(TB_Email);
+            Controls.Add(TB_Telefono);
+            Controls.Add(TB_Nombre);
+            Controls.Add(TB_Cedula);
             Controls.Add(B_GuardarActualizacionPersona);
             Controls.Add(B_Cancelar);
             Controls.Add(label6);
@@ -173,6 +175,7 @@
             Controls.Add(label1);
             Name = "F_ActualizacionDatos";
             Text = "ActualizacionDatos";
+            Load += F_ActualizacionDatos_Load;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -187,10 +190,10 @@
         private Label label6;
         private Button B_Cancelar;
         private Button B_GuardarActualizacionPersona;
-        private TextBox textBox1;
-        private TextBox textBox2;
-        private TextBox textBox3;
-        private TextBox textBox4;
-        private ComboBox comboBox1;
+        private TextBox TB_Cedula;
+        private TextBox TB_Nombre;
+        private TextBox TB_Telefono;
+        private TextBox TB_Email;
+        private ComboBox CB_Rol;
     }
 }
