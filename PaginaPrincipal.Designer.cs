@@ -30,6 +30,7 @@
         {
             label1 = new Label();
             P_DatosPersonal = new Panel();
+            B_AgregarDatos = new Button();
             B_EliminarDatos = new Button();
             B_ActualizarPersona = new Button();
             DGV_DatosPersonal = new DataGridView();
@@ -56,6 +57,7 @@
             // 
             // P_DatosPersonal
             // 
+            P_DatosPersonal.Controls.Add(B_AgregarDatos);
             P_DatosPersonal.Controls.Add(B_EliminarDatos);
             P_DatosPersonal.Controls.Add(B_ActualizarPersona);
             P_DatosPersonal.Controls.Add(DGV_DatosPersonal);
@@ -65,9 +67,19 @@
             P_DatosPersonal.TabIndex = 1;
             P_DatosPersonal.Paint += P_DatosPersonal_Paint;
             // 
+            // B_AgregarDatos
+            // 
+            B_AgregarDatos.Location = new Point(919, 149);
+            B_AgregarDatos.Name = "B_AgregarDatos";
+            B_AgregarDatos.Size = new Size(208, 48);
+            B_AgregarDatos.TabIndex = 3;
+            B_AgregarDatos.Text = "Agregar Datos";
+            B_AgregarDatos.UseVisualStyleBackColor = true;
+            B_AgregarDatos.Click += B_AgregarDatos_Click;
+            // 
             // B_EliminarDatos
             // 
-            B_EliminarDatos.Location = new Point(917, 256);
+            B_EliminarDatos.Location = new Point(920, 301);
             B_EliminarDatos.Name = "B_EliminarDatos";
             B_EliminarDatos.Size = new Size(207, 42);
             B_EliminarDatos.TabIndex = 2;
@@ -77,7 +89,7 @@
             // 
             // B_ActualizarPersona
             // 
-            B_ActualizarPersona.Location = new Point(916, 176);
+            B_ActualizarPersona.Location = new Point(919, 221);
             B_ActualizarPersona.Name = "B_ActualizarPersona";
             B_ActualizarPersona.Size = new Size(208, 48);
             B_ActualizarPersona.TabIndex = 1;
@@ -132,6 +144,7 @@
             B_Inventario.TabIndex = 5;
             B_Inventario.Text = "Inventario";
             B_Inventario.UseVisualStyleBackColor = true;
+            B_Inventario.Click += B_Inventario_Click;
             // 
             // B_Ventas
             // 
@@ -178,6 +191,7 @@
             Controls.Add(label1);
             Name = "F_PaginaPrincipal";
             Text = "PaginaPrincipal";
+            Load += F_PaginaPrincipal_Load;
             P_DatosPersonal.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)DGV_DatosPersonal).EndInit();
             ResumeLayout(false);
@@ -198,5 +212,6 @@
         private DataGridView DGV_DatosPersonal;
         private Button B_EliminarDatos;
         private Button B_ActualizarPersona;
+        private Button B_AgregarDatos;
     }
 }

@@ -81,7 +81,7 @@ namespace ProyectoBD
                     conn.Open();
 
                     // Primero validamos si ya existe ese email
-                    string queryVerificar = "SELECT COUNT(*) FROM Persona WHERE Cedula = @IdPersona, Email = @Email, Telefono = @Telefono";
+                    string queryVerificar = "SELECT COUNT(*) FROM Persona WHERE IdPersona = @IdPersona OR Email = @Email OR Telefono = @Telefono";
                     SqlCommand cmdVerificar = new SqlCommand(queryVerificar, conn);
                     cmdVerificar.Parameters.AddWithValue("@IdPersona", cedula_form);
                     cmdVerificar.Parameters.AddWithValue("@Email", email_form);

@@ -67,3 +67,6 @@ C:\Users\nicol\OneDrive - UPB\Quinto Semestre\BD\Final\ProyectoBD\obj\Debug\net8
 C:\Users\nicol\OneDrive - UPB\Quinto Semestre\BD\Final\ProyectoBD\obj\Debug\net8.0-windows\ProyectoBD.F_PaginaPrincipal.resources
 C:\Users\nicol\OneDrive - UPB\Quinto Semestre\BD\Final\ProyectoBD\obj\Debug\net8.0-windows\ProyectoBD.F_Registro.resources
 C:\Users\nicol\OneDrive - UPB\Quinto Semestre\BD\Final\ProyectoBD\obj\Debug\net8.0-windows\ProyectoBD.F_ActualizacionDatos.resources
+C:\Users\nicol\OneDrive - UPB\Quinto Semestre\BD\Final\ProyectoBD\obj\Debug\net8.0-windows\ProyectoBD.F_AgregarCategoria.resources
+C:\Users\nicol\OneDrive - UPB\Quinto Semestre\BD\Final\ProyectoBD\obj\Debug\net8.0-windows\ProyectoBD.F_AgregarProveedor.resources
+C:\Users\nicol\OneDrive - UPB\Quinto Semestre\BD\Final\ProyectoBD\obj\Debug\net8.0-windows\ProyectoBD.F_AgregarInventario.resources

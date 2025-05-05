@@ -4,6 +4,15 @@
     <Compile Update="ActualizacionDatos.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="AgregarCategoria.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="AgregarInventario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="AgregarProveedor.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Inicio_Sesion.cs">
       <SubType>Form</SubType>
     </Compile>
