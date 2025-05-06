@@ -41,6 +41,7 @@
             B_Ventas = new Button();
             B_Proveedores = new Button();
             button1 = new Button();
+            B_Despachar = new Button();
             P_DatosPersonal.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)DGV_DatosPersonal).BeginInit();
             SuspendLayout();
@@ -57,6 +58,7 @@
             // 
             // P_DatosPersonal
             // 
+            P_DatosPersonal.Controls.Add(B_Despachar);
             P_DatosPersonal.Controls.Add(B_AgregarDatos);
             P_DatosPersonal.Controls.Add(B_EliminarDatos);
             P_DatosPersonal.Controls.Add(B_ActualizarPersona);
@@ -154,6 +156,7 @@
             B_Ventas.TabIndex = 6;
             B_Ventas.Text = "Ventas";
             B_Ventas.UseVisualStyleBackColor = true;
+            B_Ventas.Click += B_Ventas_Click;
             // 
             // B_Proveedores
             // 
@@ -174,6 +177,15 @@
             button1.Text = "Categorias";
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
+            // 
+            // B_Despachar
+            // 
+            B_Despachar.Location = new Point(920, 361);
+            B_Despachar.Name = "B_Despachar";
+            B_Despachar.Size = new Size(207, 42);
+            B_Despachar.TabIndex = 4;
+            B_Despachar.Text = "Despachar Venta";
+            B_Despachar.UseVisualStyleBackColor = true;
             // 
             // F_PaginaPrincipal
             // 
@@ -213,5 +225,6 @@
         private Button B_EliminarDatos;
         private Button B_ActualizarPersona;
         private Button B_AgregarDatos;
+        private Button B_Despachar;
     }
 }

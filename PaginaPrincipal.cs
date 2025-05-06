@@ -117,12 +117,77 @@ namespace ProyectoBD
             }
         }
 
+        private void CargarDatosVentas()
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    conn.Open();
+                    string query = @"
+                SELECT 
+                    V.IdVenta,
+                    V.FechaVenta,
+                    V.Cliente,
+                    V.IdPersona,
+                    DV.IdDetalleVenta,
+                    DV.IdProducto,
+                    DV.Cantidad
+                FROM Venta V
+                INNER JOIN DetalleVenta DV ON V.IdVenta = DV.IdVenta";
+
+                    SqlDataAdapter adapter = new SqlDataAdapter(query, conn);
+                    DataTable tabla = new DataTable();
+                    adapter.Fill(tabla);
+                    DGV_DatosPersonal.DataSource = tabla;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al cargar datos: " + ex.Message);
+                }
+            }
+        }
+
+        private void CargarDatosInventario()
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    conn.Open();
+                    string query = @"
+                                    SELECT 
+                                        p.IdProducto, 
+                                        p.Nombre, 
+                                        p.Stock, 
+                                        pr.Nombre AS Proveedor, 
+                                        c.Descripcion AS Categoria, 
+                                        p.Precio
+                                    FROM InventarioProducto p
+                                    INNER JOIN Proveedor pr ON p.IdProveedor = pr.IdProveedor
+                                    INNER JOIN Categoria c ON p.IdCategoria = c.IdCategoria";
+
+                    SqlDataAdapter adapter = new SqlDataAdapter(query, conn);
+                    DataTable tabla = new DataTable();
+                    adapter.Fill(tabla);
+                    DGV_DatosPersonal.DataSource = tabla;
+
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al cargar datos: " + ex.Message);
+                }
+            }
+        }
+
         private void B_Personas_Click(object sender, EventArgs e)
         {
             seccionActual = "Persona";
             P_DatosPersonal.Show();
             P_DatosPersonal.BringToFront(); // Mostramos el panel
             B_AgregarDatos.Hide();
+            B_Despachar.Hide();
             CargarDatosPersonas();               // Cargamos la tabla
         }
 
@@ -268,7 +333,27 @@ namespace ProyectoBD
             }
             else if (seccionActual == "Inventario")
             {
+                if (DGV_DatosPersonal.SelectedRows.Count > 0)
+                {
+                    var idProducto = DGV_DatosPersonal.SelectedRows[0].Cells["IdProducto"].Value.ToString();
 
+                    // Confirmación
+                    var confirm = MessageBox.Show("¿Estás seguro de eliminar este Producto?", "Confirmar eliminación", MessageBoxButtons.YesNo);
+                    if (confirm == DialogResult.Yes)
+                    {
+                        using (SqlConnection conn = new SqlConnection(connectionString))
+                        {
+                            string deleteQuery = "DELETE FROM InventarioProducto WHERE IdProducto = @IdProducto";
+                            SqlCommand cmd = new SqlCommand(deleteQuery, conn);
+                            cmd.Parameters.AddWithValue("@IdProducto", idProducto);
+                            conn.Open();
+                            cmd.ExecuteNonQuery();
+                            conn.Close();
+                            MessageBox.Show("Producto eliminado.");
+                            CargarDatosInventario(); // refrescar tabla
+                        }
+                    }
+                }
             }
         }
 
@@ -277,6 +362,9 @@ namespace ProyectoBD
             seccionActual = "Proveedor";
             P_DatosPersonal.Show();
             B_AgregarDatos.Show();
+            B_ActualizarPersona.Show();
+            B_EliminarDatos.Show();
+            B_Despachar.Hide();
             CargarDatosProveedores();
         }
 
@@ -285,6 +373,9 @@ namespace ProyectoBD
             seccionActual = "Categoria";
             P_DatosPersonal.Show();
             B_AgregarDatos.Show();
+            B_ActualizarPersona.Show();
+            B_EliminarDatos.Show();
+            B_Despachar.Hide();
             CargarDatosCategorias();
         }
 
@@ -313,13 +404,27 @@ namespace ProyectoBD
             seccionActual = "Inventario";
             P_DatosPersonal.Show();
             B_AgregarDatos.Show();
-            //CargarDatosInventario();
+            B_ActualizarPersona.Show();
+            B_EliminarDatos.Show();
+            B_Despachar.Hide();
+            CargarDatosInventario();
 
         }
 
         private void F_PaginaPrincipal_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void B_Ventas_Click(object sender, EventArgs e)
+        {
+            seccionActual = "Ventas";
+            P_DatosPersonal.Show();
+            B_AgregarDatos.Hide();
+            B_ActualizarPersona.Hide();
+            B_EliminarDatos.Hide();
+            B_Despachar.Show();
+            CargarDatosVentas();
         }
     }
 }

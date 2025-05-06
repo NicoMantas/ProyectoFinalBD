@@ -17,7 +17,7 @@ namespace ProyectoBD
 
         public F_AgregarProveedor()
         {
-            InitializeComponent(); 
+            InitializeComponent();
             GenerarSiguienteIDProveedor();
             TB_IDProveedor.ReadOnly = true;
         }
@@ -160,6 +160,11 @@ namespace ProyectoBD
             {
                 MessageBox.Show("Por favor complete todos los campos antes de continuar.", "Campos incompletos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+        }
+
+        private void F_AgregarProveedor_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

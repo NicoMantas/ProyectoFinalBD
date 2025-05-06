@@ -174,6 +174,7 @@
             Controls.Add(label1);
             Name = "F_AgregarProveedor";
             Text = "AgregarProveedor";
+            Load += F_AgregarProveedor_Load;
             ResumeLayout(false);
             PerformLayout();
         }
