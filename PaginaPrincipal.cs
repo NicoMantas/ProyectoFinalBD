@@ -249,7 +249,23 @@ namespace ProyectoBD
             }
             else if (seccionActual == "Inventario")
             {
+                if (DGV_DatosPersonal.SelectedRows.Count > 0)
+                {
+                    var idProducto = DGV_DatosPersonal.SelectedRows[0].Cells["IdProducto"].Value.ToString();
+                    // Aquí abrirías un formulario de edición pasando el ID
+                    MessageBox.Show("Actualizar persona con ID: " + idProducto);
 
+                    string IdProducto = DGV_DatosPersonal.SelectedRows[0].Cells["IdProducto"].Value.ToString();
+                    string Nombre = DGV_DatosPersonal.SelectedRows[0].Cells["Nombre"].Value.ToString();
+                    string Stock = DGV_DatosPersonal.SelectedRows[0].Cells["Stock"].Value.ToString();
+                    string Proveedor = DGV_DatosPersonal.SelectedRows[0].Cells["Proveedor"].Value.ToString();
+                    string Categoria = DGV_DatosPersonal.SelectedRows[0].Cells["Categoria"].Value.ToString();
+                    string Precio = DGV_DatosPersonal.SelectedRows[0].Cells["Precio"].Value.ToString();
+
+
+                    F_ActualizacionDatosProducto menu = new F_ActualizacionDatosProducto(IdProducto, Nombre, Stock, Proveedor, Categoria, Precio);
+                    menu.Show();
+                }
             }
         }
 
