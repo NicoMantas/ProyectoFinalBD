@@ -149,11 +149,38 @@ namespace ProyectoBD
             }
             else if (seccionActual == "Proveedor")
             {
+                if (DGV_DatosPersonal.SelectedRows.Count > 0)
+                {
+                    var idProveedor = DGV_DatosPersonal.SelectedRows[0].Cells["IdProveedor"].Value.ToString();
+                    // Aquí abrirías un formulario de edición pasando el ID
+                    MessageBox.Show("Actualizar persona con ID: " + idProveedor);
 
+                    string IdProveedor = DGV_DatosPersonal.SelectedRows[0].Cells["IdProveedor"].Value.ToString();
+                    string nombre = DGV_DatosPersonal.SelectedRows[0].Cells["Nombre"].Value.ToString();
+                    string telefono = DGV_DatosPersonal.SelectedRows[0].Cells["Telefono"].Value.ToString();
+                    string direccion = DGV_DatosPersonal.SelectedRows[0].Cells["Direccion"].Value.ToString();
+                    string email = DGV_DatosPersonal.SelectedRows[0].Cells["Email"].Value.ToString();
+
+
+                    F_ActualizacionDatosProveedor menu = new F_ActualizacionDatosProveedor(IdProveedor, nombre, telefono, direccion, email);
+                    menu.Show();
+                }
             }
             else if (seccionActual == "Categoria")
             {
+                if (DGV_DatosPersonal.SelectedRows.Count > 0)
+                {
+                    var idCategoria = DGV_DatosPersonal.SelectedRows[0].Cells["IdCategoria"].Value.ToString();
+                    // Aquí abrirías un formulario de edición pasando el ID
+                    MessageBox.Show("Actualizar persona con ID: " + idCategoria);
 
+                    string IdCategoria = DGV_DatosPersonal.SelectedRows[0].Cells["IdCategoria"].Value.ToString();
+                    string Descripcion = DGV_DatosPersonal.SelectedRows[0].Cells["Descripcion"].Value.ToString();
+
+
+                    F_ActualizacionDatosCategoria menu = new F_ActualizacionDatosCategoria(IdCategoria, Descripcion);
+                    menu.Show();
+                }
             }
             else if (seccionActual == "Inventario")
             {
@@ -163,6 +190,7 @@ namespace ProyectoBD
 
         private void button3_Click(object sender, EventArgs e)
         {
+
             if (seccionActual == "Persona")
             {
                 if (DGV_DatosPersonal.SelectedRows.Count > 0)

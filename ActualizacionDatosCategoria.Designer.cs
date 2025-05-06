@@ -1,6 +1,6 @@
 ﻿namespace ProyectoBD
 {
-    partial class F_AgregarCategoria
+    partial class F_ActualizacionDatosCategoria
     {
         /// <summary>
         /// Required designer variable.
@@ -31,7 +31,7 @@
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
-            TB_IDCategoria = new TextBox();
+            TB_IdCategoria = new TextBox();
             TB_Descripcion = new TextBox();
             B_Cancelar = new Button();
             B_Confirmar = new Button();
@@ -41,16 +41,16 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(128, 9);
+            label1.Location = new Point(100, 9);
             label1.Name = "label1";
-            label1.Size = new Size(221, 29);
+            label1.Size = new Size(257, 29);
             label1.TabIndex = 0;
-            label1.Text = "Agregar Categoria";
+            label1.Text = "Actualizar Categorias";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(37, 107);
+            label2.Location = new Point(30, 101);
             label2.Name = "label2";
             label2.Size = new Size(104, 25);
             label2.TabIndex = 1;
@@ -59,31 +59,31 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(37, 169);
+            label3.Location = new Point(30, 163);
             label3.Name = "label3";
             label3.Size = new Size(104, 25);
             label3.TabIndex = 2;
             label3.Text = "Descripcion";
             // 
-            // TB_IDCategoria
+            // TB_IdCategoria
             // 
-            TB_IDCategoria.Location = new Point(159, 110);
-            TB_IDCategoria.Name = "TB_IDCategoria";
-            TB_IDCategoria.Size = new Size(285, 31);
-            TB_IDCategoria.TabIndex = 3;
+            TB_IdCategoria.Location = new Point(137, 98);
+            TB_IdCategoria.Name = "TB_IdCategoria";
+            TB_IdCategoria.Size = new Size(220, 31);
+            TB_IdCategoria.TabIndex = 3;
             // 
             // TB_Descripcion
             // 
-            TB_Descripcion.Location = new Point(159, 169);
+            TB_Descripcion.Location = new Point(137, 163);
             TB_Descripcion.Name = "TB_Descripcion";
-            TB_Descripcion.Size = new Size(285, 31);
+            TB_Descripcion.Size = new Size(220, 31);
             TB_Descripcion.TabIndex = 4;
             // 
             // B_Cancelar
             // 
-            B_Cancelar.Location = new Point(16, 241);
+            B_Cancelar.Location = new Point(8, 246);
             B_Cancelar.Name = "B_Cancelar";
-            B_Cancelar.Size = new Size(125, 39);
+            B_Cancelar.Size = new Size(113, 34);
             B_Cancelar.TabIndex = 5;
             B_Cancelar.Text = "Cancelar";
             B_Cancelar.UseVisualStyleBackColor = true;
@@ -91,29 +91,30 @@
             // 
             // B_Confirmar
             // 
-            B_Confirmar.Location = new Point(364, 241);
+            B_Confirmar.Location = new Point(292, 246);
             B_Confirmar.Name = "B_Confirmar";
-            B_Confirmar.Size = new Size(131, 39);
+            B_Confirmar.Size = new Size(144, 34);
             B_Confirmar.TabIndex = 6;
-            B_Confirmar.Text = "Confirmar";
+            B_Confirmar.Text = "Actualizar";
+            B_Confirmar.TextAlign = ContentAlignment.BottomCenter;
             B_Confirmar.UseVisualStyleBackColor = true;
             B_Confirmar.Click += B_Confirmar_Click;
             // 
-            // F_AgregarCategoria
+            // F_ActualizacionDatosCategoria
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(507, 286);
+            ClientSize = new Size(448, 304);
             Controls.Add(B_Confirmar);
             Controls.Add(B_Cancelar);
             Controls.Add(TB_Descripcion);
-            Controls.Add(TB_IDCategoria);
+            Controls.Add(TB_IdCategoria);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
-            Name = "F_AgregarCategoria";
-            Text = "AgregarCategoria";
-            Load += F_AgregarCategoria_Load;
+            Name = "F_ActualizacionDatosCategoria";
+            Text = "ActualizacionDatosCategoria";
+            Load += F_ActualizacionDatosCategoria_Load;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -123,7 +124,7 @@
         private Label label1;
         private Label label2;
         private Label label3;
-        private TextBox TB_IDCategoria;
+        private TextBox TB_IdCategoria;
         private TextBox TB_Descripcion;
         private Button B_Cancelar;
         private Button B_Confirmar;

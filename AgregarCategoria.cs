@@ -146,5 +146,10 @@ namespace ProyectoBD
                 MessageBox.Show("Por favor complete todos los campos antes de continuar.", "Campos incompletos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+
+        private void F_AgregarCategoria_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
