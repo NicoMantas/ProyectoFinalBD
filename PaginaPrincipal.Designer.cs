@@ -30,6 +30,7 @@
         {
             label1 = new Label();
             P_DatosPersonal = new Panel();
+            B_Despachar = new Button();
             B_AgregarDatos = new Button();
             B_EliminarDatos = new Button();
             B_ActualizarPersona = new Button();
@@ -41,7 +42,6 @@
             B_Ventas = new Button();
             B_Proveedores = new Button();
             button1 = new Button();
-            B_Despachar = new Button();
             P_DatosPersonal.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)DGV_DatosPersonal).BeginInit();
             SuspendLayout();
@@ -68,6 +68,16 @@
             P_DatosPersonal.Size = new Size(1178, 477);
             P_DatosPersonal.TabIndex = 1;
             P_DatosPersonal.Paint += P_DatosPersonal_Paint;
+            // 
+            // B_Despachar
+            // 
+            B_Despachar.Location = new Point(920, 361);
+            B_Despachar.Name = "B_Despachar";
+            B_Despachar.Size = new Size(207, 42);
+            B_Despachar.TabIndex = 4;
+            B_Despachar.Text = "Despachar Venta";
+            B_Despachar.UseVisualStyleBackColor = true;
+            B_Despachar.Click += B_Despachar_Click;
             // 
             // B_AgregarDatos
             // 
@@ -177,15 +187,6 @@
             button1.Text = "Categorias";
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
-            // 
-            // B_Despachar
-            // 
-            B_Despachar.Location = new Point(920, 361);
-            B_Despachar.Name = "B_Despachar";
-            B_Despachar.Size = new Size(207, 42);
-            B_Despachar.TabIndex = 4;
-            B_Despachar.Text = "Despachar Venta";
-            B_Despachar.UseVisualStyleBackColor = true;
             // 
             // F_PaginaPrincipal
             // 

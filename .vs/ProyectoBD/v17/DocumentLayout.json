@@ -3,22 +3,6 @@
   "WorkspaceRootPath": "C:\\Users\\nicol\\OneDrive - UPB\\Quinto Semestre\\BD\\Final\\ProyectoBD\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{87526D24-9DD3-45F7-B327-A70EB4D3F1DC}|ProyectoBD.csproj|c:\\users\\nicol\\onedrive - upb\\quinto semestre\\bd\\final\\proyectobd\\actualizaciondatosproducto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{87526D24-9DD3-45F7-B327-A70EB4D3F1DC}|ProyectoBD.csproj|solutionrelative:actualizaciondatosproducto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{87526D24-9DD3-45F7-B327-A70EB4D3F1DC}|ProyectoBD.csproj|c:\\users\\nicol\\onedrive - upb\\quinto semestre\\bd\\final\\proyectobd\\actualizaciondatosproducto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{87526D24-9DD3-45F7-B327-A70EB4D3F1DC}|ProyectoBD.csproj|solutionrelative:actualizaciondatosproducto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{87526D24-9DD3-45F7-B327-A70EB4D3F1DC}|ProyectoBD.csproj|c:\\users\\nicol\\onedrive - upb\\quinto semestre\\bd\\final\\proyectobd\\actualizaciondatoscategoria.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{87526D24-9DD3-45F7-B327-A70EB4D3F1DC}|ProyectoBD.csproj|solutionrelative:actualizaciondatoscategoria.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{87526D24-9DD3-45F7-B327-A70EB4D3F1DC}|ProyectoBD.csproj|c:\\users\\nicol\\onedrive - upb\\quinto semestre\\bd\\final\\proyectobd\\actualizaciondatoscategoria.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{87526D24-9DD3-45F7-B327-A70EB4D3F1DC}|ProyectoBD.csproj|solutionrelative:actualizaciondatoscategoria.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{87526D24-9DD3-45F7-B327-A70EB4D3F1DC}|ProyectoBD.csproj|c:\\users\\nicol\\onedrive - upb\\quinto semestre\\bd\\final\\proyectobd\\paginaprincipal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{87526D24-9DD3-45F7-B327-A70EB4D3F1DC}|ProyectoBD.csproj|solutionrelative:paginaprincipal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -34,22 +18,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 2,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ActualizacionDatosProducto.cs",
-              "DocumentMoniker": "C:\\Users\\nicol\\OneDrive - UPB\\Quinto Semestre\\BD\\Final\\ProyectoBD\\ActualizacionDatosProducto.cs",
-              "RelativeDocumentMoniker": "ActualizacionDatosProducto.cs",
-              "ToolTip": "C:\\Users\\nicol\\OneDrive - UPB\\Quinto Semestre\\BD\\Final\\ProyectoBD\\ActualizacionDatosProducto.cs",
-              "RelativeToolTip": "ActualizacionDatosProducto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAhAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-06T17:15:02.034Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
@@ -60,64 +30,28 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "ActualizacionDatosCategoria.cs",
-              "DocumentMoniker": "C:\\Users\\nicol\\OneDrive - UPB\\Quinto Semestre\\BD\\Final\\ProyectoBD\\ActualizacionDatosCategoria.cs",
-              "RelativeDocumentMoniker": "ActualizacionDatosCategoria.cs",
-              "ToolTip": "C:\\Users\\nicol\\OneDrive - UPB\\Quinto Semestre\\BD\\Final\\ProyectoBD\\ActualizacionDatosCategoria.cs",
-              "RelativeToolTip": "ActualizacionDatosCategoria.cs",
-              "ViewState": "AgIAABEAAAAAAAAAAAAswCoAAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-06T17:28:15.076Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "ActualizacionDatosCategoria.cs [Dise\u00F1o]",
-              "DocumentMoniker": "C:\\Users\\nicol\\OneDrive - UPB\\Quinto Semestre\\BD\\Final\\ProyectoBD\\ActualizacionDatosCategoria.cs",
-              "RelativeDocumentMoniker": "ActualizacionDatosCategoria.cs",
-              "ToolTip": "C:\\Users\\nicol\\OneDrive - UPB\\Quinto Semestre\\BD\\Final\\ProyectoBD\\ActualizacionDatosCategoria.cs [Dise\u00F1o]",
-              "RelativeToolTip": "ActualizacionDatosCategoria.cs [Dise\u00F1o]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-06T17:28:13.318Z",
-              "EditorCaption": " [Dise\u00F1o]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ActualizacionDatosProducto.cs [Dise\u00F1o]",
-              "DocumentMoniker": "C:\\Users\\nicol\\OneDrive - UPB\\Quinto Semestre\\BD\\Final\\ProyectoBD\\ActualizacionDatosProducto.cs",
-              "RelativeDocumentMoniker": "ActualizacionDatosProducto.cs",
-              "ToolTip": "C:\\Users\\nicol\\OneDrive - UPB\\Quinto Semestre\\BD\\Final\\ProyectoBD\\ActualizacionDatosProducto.cs [Dise\u00F1o]",
-              "RelativeToolTip": "ActualizacionDatosProducto.cs [Dise\u00F1o]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-06T17:26:59.201Z",
-              "EditorCaption": " [Dise\u00F1o]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 0,
               "Title": "PaginaPrincipal.cs",
               "DocumentMoniker": "C:\\Users\\nicol\\OneDrive - UPB\\Quinto Semestre\\BD\\Final\\ProyectoBD\\PaginaPrincipal.cs",
               "RelativeDocumentMoniker": "PaginaPrincipal.cs",
               "ToolTip": "C:\\Users\\nicol\\OneDrive - UPB\\Quinto Semestre\\BD\\Final\\ProyectoBD\\PaginaPrincipal.cs",
               "RelativeToolTip": "PaginaPrincipal.cs",
-              "ViewState": "AgIAAO8AAAAAAAAAAAAcwAkBAACQAAAAAAAAAA==",
+              "ViewState": "AgIAAPAAAAAAAAAAAADwv0ACAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-06T00:36:40.284Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 1,
               "Title": "PaginaPrincipal.cs [Dise\u00F1o]",
               "DocumentMoniker": "C:\\Users\\nicol\\OneDrive - UPB\\Quinto Semestre\\BD\\Final\\ProyectoBD\\PaginaPrincipal.cs",
               "RelativeDocumentMoniker": "PaginaPrincipal.cs",
               "ToolTip": "C:\\Users\\nicol\\OneDrive - UPB\\Quinto Semestre\\BD\\Final\\ProyectoBD\\PaginaPrincipal.cs [Dise\u00F1o]",
               "RelativeToolTip": "PaginaPrincipal.cs [Dise\u00F1o]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-06T00:36:33.365Z"
+              "WhenOpened": "2025-05-06T00:36:33.365Z",
+              "EditorCaption": " [Dise\u00F1o]"
             }
           ]
         }

@@ -442,5 +442,136 @@ namespace ProyectoBD
             B_Despachar.Show();
             CargarDatosVentas();
         }
+
+        private void B_Despachar_Click(object sender, EventArgs e)
+        {
+            /*
+            if (seccionActual == "Ventas")
+            {
+                if (DGV_DatosPersonal.SelectedRows.Count > 0)
+                {
+                    string idProducto = DGV_DatosPersonal.SelectedRows[0].Cells["IdProducto"].Value.ToString();
+                    int cantidadVenta = Convert.ToInt32(DGV_DatosPersonal.SelectedRows[0].Cells["Cantidad"].Value); // Cantidad vendida (a despachar)
+
+                    // Consulta para obtener el stock actual desde InventarioProducto
+                    int stockActual = 0;
+
+                    using (SqlConnection conn = new SqlConnection(connectionString))
+                    {
+                        conn.Open();
+                        string stockQuery = "SELECT Stock FROM InventarioProducto WHERE IdProducto = @IdProducto";
+                        SqlCommand cmd = new SqlCommand(stockQuery, conn);
+                        cmd.Parameters.AddWithValue("@IdProducto", idProducto);
+                        object result = cmd.ExecuteScalar();
+
+                        if (result != null)
+                        {
+                            stockActual = Convert.ToInt32(result);
+                        }
+                        conn.Close();
+                    }
+
+                    if (stockActual < cantidadVenta)
+                    {
+                        MessageBox.Show("No hay suficiente stock para despachar esa cantidad.");
+                        return;
+                    }
+
+                    // Si hay suficiente stock, actualizamos el inventario
+                    using (SqlConnection conn = new SqlConnection(connectionString))
+                    {
+                        conn.Open();
+                        string updateQuery = "UPDATE InventarioProducto SET Stock = Stock - @Cantidad WHERE IdProducto = @IdProducto";
+                        SqlCommand cmd = new SqlCommand(updateQuery, conn);
+                        cmd.Parameters.AddWithValue("@Cantidad", cantidadVenta);
+                        cmd.Parameters.AddWithValue("@IdProducto", idProducto);
+                        cmd.ExecuteNonQuery();
+                        conn.Close();
+
+                        MessageBox.Show("Producto despachado correctamente.");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Seleccione un producto para despachar.");
+                }
+            }
+            */
+            if (seccionActual == "Ventas")
+            {
+                if (DGV_DatosPersonal.SelectedRows.Count > 0)
+                {
+                    string idProducto = DGV_DatosPersonal.SelectedRows[0].Cells["IdProducto"].Value.ToString();
+                    int cantidadVenta = Convert.ToInt32(DGV_DatosPersonal.SelectedRows[0].Cells["Cantidad"].Value);
+
+                    // Este es el ID del registro a eliminar (de la tabla DetalleVenta, por ejemplo)
+                    string idDetalleVenta = DGV_DatosPersonal.SelectedRows[0].Cells["IdDetalleVenta"].Value.ToString();
+
+                    int stockActual = 0;
+
+                    using (SqlConnection conn = new SqlConnection(connectionString))
+                    {
+                        conn.Open();
+                        string stockQuery = "SELECT Stock FROM InventarioProducto WHERE IdProducto = @IdProducto";
+                        SqlCommand cmd = new SqlCommand(stockQuery, conn);
+                        cmd.Parameters.AddWithValue("@IdProducto", idProducto);
+                        object result = cmd.ExecuteScalar();
+
+                        if (result != null)
+                        {
+                            stockActual = Convert.ToInt32(result);
+                        }
+                        conn.Close();
+                    }
+
+                    if (stockActual < cantidadVenta)
+                    {
+                        MessageBox.Show("No hay suficiente stock para despachar esa cantidad.");
+                        return;
+                    }
+
+                    using (SqlConnection conn = new SqlConnection(connectionString))
+                    {
+                        conn.Open();
+
+                        SqlTransaction transaction = conn.BeginTransaction();
+
+                        try
+                        {
+                            // Actualizar el stock
+                            string updateQuery = "UPDATE InventarioProducto SET Stock = Stock - @Cantidad WHERE IdProducto = @IdProducto";
+                            SqlCommand cmdUpdate = new SqlCommand(updateQuery, conn, transaction);
+                            cmdUpdate.Parameters.AddWithValue("@Cantidad", cantidadVenta);
+                            cmdUpdate.Parameters.AddWithValue("@IdProducto", idProducto);
+                            cmdUpdate.ExecuteNonQuery();
+
+                            // Eliminar el registro de detalle de venta
+                            string deleteQuery = "DELETE FROM DetalleVenta WHERE IdDetalleVenta = @IdDetalleVenta";
+                            SqlCommand cmdDelete = new SqlCommand(deleteQuery, conn, transaction);
+                            cmdDelete.Parameters.AddWithValue("@IdDetalleVenta", idDetalleVenta);
+                            cmdDelete.ExecuteNonQuery();
+
+                            transaction.Commit();
+                            MessageBox.Show("Producto despachado y registro eliminado correctamente.");
+                        }
+                        catch (Exception ex)
+                        {
+                            transaction.Rollback();
+                            MessageBox.Show("Error al despachar producto: " + ex.Message);
+                        }
+
+                        conn.Close();
+                    }
+
+                    CargarDatosVentas(); // Refresca la tabla con los registros restantes
+                }
+                else
+                {
+                    MessageBox.Show("Seleccione un producto para despachar.");
+                }
+            }
+        }
+
     }
 }
+

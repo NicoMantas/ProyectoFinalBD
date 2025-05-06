@@ -38,11 +38,11 @@
             TB_IDProducto = new TextBox();
             TB_Nombre = new TextBox();
             TB_Stock = new TextBox();
-            TB_IDProveedor = new TextBox();
-            TB_IDCategoria = new TextBox();
             TB_Precio = new TextBox();
             B_cancelar = new Button();
             B_Actualizar = new Button();
+            CB_IdProveedor = new ComboBox();
+            CB_IdCategoria = new ComboBox();
             SuspendLayout();
             // 
             // label1
@@ -149,20 +149,6 @@
             TB_Stock.Size = new Size(250, 31);
             TB_Stock.TabIndex = 10;
             // 
-            // TB_IDProveedor
-            // 
-            TB_IDProveedor.Location = new Point(133, 219);
-            TB_IDProveedor.Name = "TB_IDProveedor";
-            TB_IDProveedor.Size = new Size(245, 31);
-            TB_IDProveedor.TabIndex = 11;
-            // 
-            // TB_IDCategoria
-            // 
-            TB_IDCategoria.Location = new Point(132, 260);
-            TB_IDCategoria.Name = "TB_IDCategoria";
-            TB_IDCategoria.Size = new Size(244, 31);
-            TB_IDCategoria.TabIndex = 12;
-            // 
             // TB_Precio
             // 
             TB_Precio.Location = new Point(95, 302);
@@ -190,16 +176,32 @@
             B_Actualizar.UseVisualStyleBackColor = true;
             B_Actualizar.Click += B_Actualizar_Click;
             // 
+            // CB_IdProveedor
+            // 
+            CB_IdProveedor.FormattingEnabled = true;
+            CB_IdProveedor.Location = new Point(141, 218);
+            CB_IdProveedor.Name = "CB_IdProveedor";
+            CB_IdProveedor.Size = new Size(235, 33);
+            CB_IdProveedor.TabIndex = 16;
+            // 
+            // CB_IdCategoria
+            // 
+            CB_IdCategoria.FormattingEnabled = true;
+            CB_IdCategoria.Location = new Point(141, 263);
+            CB_IdCategoria.Name = "CB_IdCategoria";
+            CB_IdCategoria.Size = new Size(234, 33);
+            CB_IdCategoria.TabIndex = 17;
+            // 
             // F_AgregarInventario
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(501, 450);
+            Controls.Add(CB_IdCategoria);
+            Controls.Add(CB_IdProveedor);
             Controls.Add(B_Actualizar);
             Controls.Add(B_cancelar);
             Controls.Add(TB_Precio);
-            Controls.Add(TB_IDCategoria);
-            Controls.Add(TB_IDProveedor);
             Controls.Add(TB_Stock);
             Controls.Add(TB_Nombre);
             Controls.Add(TB_IDProducto);
@@ -230,10 +232,10 @@
         private TextBox TB_IDProducto;
         private TextBox TB_Nombre;
         private TextBox TB_Stock;
-        private TextBox TB_IDProveedor;
-        private TextBox TB_IDCategoria;
         private TextBox TB_Precio;
         private Button B_cancelar;
         private Button B_Actualizar;
+        private ComboBox CB_IdProveedor;
+        private ComboBox CB_IdCategoria;
     }
 }

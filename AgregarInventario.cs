@@ -30,17 +30,66 @@ namespace ProyectoBD
 
         private void F_AgregarInventario_Load(object sender, EventArgs e)
         {
+            CargarProveedores();
+            CargarCategorias();
+        }
 
+        private void CargarProveedores()
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    conn.Open();
+                    string query = "SELECT Nombre FROM Proveedor";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    CB_IdProveedor.Items.Clear();
+                    while (reader.Read())
+                    {
+                        CB_IdProveedor.Items.Add(reader["Nombre"].ToString());
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al cargar proveedores: " + ex.Message);
+                }
+            }
+        }
+
+        private void CargarCategorias()
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    conn.Open();
+                    string query = "SELECT Descripcion FROM Categoria";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    CB_IdCategoria.Items.Clear();
+                    while (reader.Read())
+                    {
+                        CB_IdCategoria.Items.Add(reader["Descripcion"].ToString());
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al cargar categorías: " + ex.Message);
+                }
+            }
         }
 
         public bool ValidarCampos()
         {
             bool camposValidos =
-                !string.IsNullOrWhiteSpace(TB_IDCategoria.Text) &&
+                !string.IsNullOrWhiteSpace(TB_IDProducto.Text) &&
                 !string.IsNullOrWhiteSpace(TB_Nombre.Text) &&
                 !string.IsNullOrWhiteSpace(TB_Stock.Text) &&
-                !string.IsNullOrWhiteSpace(TB_IDProveedor.Text) &&
-                !string.IsNullOrWhiteSpace(TB_IDCategoria.Text) &&
+                !string.IsNullOrWhiteSpace(CB_IdProveedor.Text) &&
+                !string.IsNullOrWhiteSpace(CB_IdCategoria.Text) &&
                 !string.IsNullOrWhiteSpace(TB_Precio.Text);
 
             B_Actualizar.Enabled = camposValidos; // Asumiendo que tienes un botón de registro
@@ -70,15 +119,16 @@ namespace ProyectoBD
         public bool CrearProductoInventario()
         {
             int idProducto_form;
-            int idProveedor_form;
-            int idCategoria_form;
             int stock_form;
             int precio_form;
 
+            string nombreProveedor = CB_IdProveedor.Text.Trim();
+            string nombreCategoria = CB_IdCategoria.Text.Trim();
+            int idProveedor_form = -1;
+            int idCategoria_form = -1;
+
             // Validar conversiones
             if (!int.TryParse(TB_IDProducto.Text.Trim(), out idProducto_form) ||
-                !int.TryParse(TB_IDProveedor.Text.Trim(), out idProveedor_form) ||
-                !int.TryParse(TB_IDCategoria.Text.Trim(), out idCategoria_form) ||
                 !int.TryParse(TB_Stock.Text.Trim(), out stock_form) ||
                 !int.TryParse(TB_Precio.Text.Trim(), out precio_form))
             {
@@ -93,6 +143,32 @@ namespace ProyectoBD
                 try
                 {
                     conn.Open();
+
+                    // Obtener IdProveedor
+                    string queryProveedor = "SELECT IdProveedor FROM Proveedor WHERE Nombre = @Nombre";
+                    SqlCommand cmdProv = new SqlCommand(queryProveedor, conn);
+                    cmdProv.Parameters.AddWithValue("@Nombre", nombreProveedor);
+                    object resultProv = cmdProv.ExecuteScalar();
+                    if (resultProv != null)
+                        idProveedor_form = Convert.ToInt32(resultProv);
+                    else
+                    {
+                        MessageBox.Show("Proveedor no encontrado.");
+                        return false;
+                    }
+
+                    // Obtener IdCategoria
+                    string queryCategoria = "SELECT IdCategoria FROM Categoria WHERE Descripcion = @Nombre";
+                    SqlCommand cmdCat = new SqlCommand(queryCategoria, conn);
+                    cmdCat.Parameters.AddWithValue("@Nombre", nombreCategoria);
+                    object resultCat = cmdCat.ExecuteScalar();
+                    if (resultCat != null)
+                        idCategoria_form = Convert.ToInt32(resultCat);
+                    else
+                    {
+                        MessageBox.Show("Categoría no encontrada.");
+                        return false;
+                    }
 
                     string queryInsert = @"
                 INSERT INTO InventarioProducto 
@@ -132,12 +208,12 @@ namespace ProyectoBD
         private void B_cancelar_Click(object sender, EventArgs e)
         {
             // 1. Limpiar todos los campos del formulario
-            TB_IDCategoria.Clear();
+            TB_IDProducto.Clear();
             TB_Nombre.Clear();
             TB_Stock.Clear();
-            TB_IDProveedor.Clear();
-            TB_IDCategoria.Clear();
             TB_Precio.Clear();
+            CB_IdProveedor.SelectedIndex = -1;
+            CB_IdCategoria.SelectedIndex = -1;
 
             // 2. Redirigir al formulario principal
             this.Hide(); // cierra el formulario actual (registro)
@@ -165,6 +241,11 @@ namespace ProyectoBD
             {
                 MessageBox.Show("Por favor complete todos los campos antes de continuar.", "Campos incompletos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+        }
+
+        private void TB_IDProveedor_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
