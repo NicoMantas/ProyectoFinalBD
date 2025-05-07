@@ -45,15 +45,21 @@ namespace ProyectoBD
             }
         }
 
-        public bool ValidarCredenciales()
+        public bool ValidarCredenciales(out string rolUsuario)
         {
             string email_form = TB_email.Text.Trim();
             string contraseña_form = TB_contraseña.Text;
             bool credencialesValidas = false;
+            rolUsuario = string.Empty;
 
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
-                string query = "SELECT COUNT(*) FROM Persona WHERE Email = @Email AND Contraseña = @Contraseña";
+                // Cambié la consulta para traer el rol del usuario
+                string query = @"
+                                SELECT R.Descripcion 
+                                FROM Persona P
+                                JOIN Rol R ON P.IdRol = R.IdRol
+                                WHERE P.Email = @Email AND P.Contraseña = @Contraseña";
                 SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@Email", email_form);
                 cmd.Parameters.AddWithValue("@Contraseña", contraseña_form);
@@ -61,8 +67,12 @@ namespace ProyectoBD
                 try
                 {
                     conn.Open();
-                    int count = (int)cmd.ExecuteScalar();
-                    credencialesValidas = count > 0;
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        credencialesValidas = true;
+                        rolUsuario = reader["Descripcion"].ToString(); // Aquí obtenemos el rol
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -73,6 +83,8 @@ namespace ProyectoBD
             return credencialesValidas;
         }
 
+
+
         private void TB_email_TextChanged(object sender, EventArgs e)
         {
             ValidarCampos();
@@ -80,9 +92,13 @@ namespace ProyectoBD
 
         private void B_InicioSesion_Click(object sender, EventArgs e)
         {
-            if (ValidarCredenciales())
+            string rol = string.Empty;
+
+            if (ValidarCredenciales(out rol))
             {
-                MessageBox.Show("Bienvenido");
+                // Guardamos el rol en una variable global (lo puedes utilizar en el siguiente formulario)
+                Program.RolActual = rol;
+                MessageBox.Show("Bienvenido recuerde que usted tiene un rol de: " + Program.RolActual);
                 F_PaginaPrincipal menu = new F_PaginaPrincipal(); // Crear instancia del siguiente form
                 menu.Show(); // Mostrar el nuevo formulario
 

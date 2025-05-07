@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.Data.SqlClient;
+using static System.Collections.Specialized.BitVector32;
 
 namespace ProyectoBD
 {
@@ -17,10 +18,13 @@ namespace ProyectoBD
         private string seccionActual = "";
 
 
+
         public F_PaginaPrincipal()
         {
             InitializeComponent();
             P_DatosPersonal.Hide();
+            AplicarPermisosPorSeccion(seccionActual);
+
         }
 
         private void B_CerrarSesion_Click(object sender, EventArgs e)
@@ -186,9 +190,9 @@ namespace ProyectoBD
             seccionActual = "Persona";
             P_DatosPersonal.Show();
             P_DatosPersonal.BringToFront(); // Mostramos el panel
-            B_AgregarDatos.Hide();
-            B_Despachar.Hide();
-            CargarDatosPersonas();               // Cargamos la tabla
+            AplicarPermisosBoton(seccionActual);
+            CargarDatosPersonas();
+
         }
 
         private void B_ActualizarPersona_Click(object sender, EventArgs e)
@@ -377,10 +381,7 @@ namespace ProyectoBD
         {
             seccionActual = "Proveedor";
             P_DatosPersonal.Show();
-            B_AgregarDatos.Show();
-            B_ActualizarPersona.Show();
-            B_EliminarDatos.Show();
-            B_Despachar.Hide();
+            AplicarPermisosBoton(seccionActual);
             CargarDatosProveedores();
         }
 
@@ -388,10 +389,7 @@ namespace ProyectoBD
         {
             seccionActual = "Categoria";
             P_DatosPersonal.Show();
-            B_AgregarDatos.Show();
-            B_ActualizarPersona.Show();
-            B_EliminarDatos.Show();
-            B_Despachar.Hide();
+            AplicarPermisosBoton(seccionActual);
             CargarDatosCategorias();
         }
 
@@ -419,10 +417,7 @@ namespace ProyectoBD
         {
             seccionActual = "Inventario";
             P_DatosPersonal.Show();
-            B_AgregarDatos.Show();
-            B_ActualizarPersona.Show();
-            B_EliminarDatos.Show();
-            B_Despachar.Hide();
+            AplicarPermisosBoton(seccionActual);
             CargarDatosInventario();
 
         }
@@ -436,67 +431,111 @@ namespace ProyectoBD
         {
             seccionActual = "Ventas";
             P_DatosPersonal.Show();
-            B_AgregarDatos.Hide();
-            B_ActualizarPersona.Hide();
-            B_EliminarDatos.Hide();
-            B_Despachar.Show();
+            AplicarPermisosBoton(seccionActual);
             CargarDatosVentas();
+        }
+
+        public void AplicarPermisosPorSeccion(string seccion)
+        {
+            if (Program.RolActual == "Administrador")
+            {
+                // El administrador siempre tiene acceso total
+                B_AgregarDatos.Enabled = true;
+                B_ActualizarPersona.Enabled = true;
+                B_EliminarDatos.Enabled = true;
+                B_Despachar.Enabled = true;
+            }
+            else if (Program.RolActual == "Usuario")
+            {
+                B_Personas.Visible = false;
+                B_CrearPersona.Visible = false;
+            }
+        }
+
+        public void AplicarPermisosBoton(string seccion)
+        {
+            if (Program.RolActual == "Usuario")
+            {
+                // Aplica permisos según la sección
+                switch (seccion)
+                {
+                    case "Inventario":
+                        B_AgregarDatos.Visible = true;
+                        B_ActualizarPersona.Visible = true;
+                        B_EliminarDatos.Visible = false;
+                        B_Despachar.Visible = false;
+                        break;
+
+                    case "Ventas":
+                        B_Despachar.Visible = true;
+                        B_AgregarDatos.Visible = false;
+                        B_ActualizarPersona.Visible = false;
+                        B_EliminarDatos.Visible = false;
+                        break;
+
+                    case "Proveedor":
+                        B_AgregarDatos.Visible = false;
+                        B_ActualizarPersona.Visible = false;
+                        B_EliminarDatos.Visible = false;
+                        B_Despachar.Visible = false;
+                        break;
+                    case "Categoria":
+                        B_AgregarDatos.Visible = false;
+                        B_ActualizarPersona.Visible = false;
+                        B_EliminarDatos.Visible = false;
+                        B_Despachar.Visible = false;
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+            else
+            {
+                switch (seccion)
+                {
+                    case "Persona":
+                        B_AgregarDatos.Visible = false;
+                        B_ActualizarPersona.Visible = true;
+                        B_EliminarDatos.Visible = true;
+                        B_Despachar.Visible = false;
+                        break;
+
+                    case "Inventario":
+                        B_AgregarDatos.Visible = true;
+                        B_ActualizarPersona.Visible = true;
+                        B_EliminarDatos.Visible = true;
+                        B_Despachar.Visible = false;
+                        break;
+
+                    case "Ventas":
+                        B_Despachar.Visible = true;
+                        B_AgregarDatos.Visible = false;
+                        B_ActualizarPersona.Visible = false;
+                        B_EliminarDatos.Visible = false;
+                        break;
+
+                    case "Proveedor":
+                        B_AgregarDatos.Visible = true;
+                        B_ActualizarPersona.Visible = true;
+                        B_EliminarDatos.Visible = true;
+                        B_Despachar.Visible = false;
+                        break;
+                    case "Categoria":
+                        B_AgregarDatos.Visible = true;
+                        B_ActualizarPersona.Visible = true;
+                        B_EliminarDatos.Visible = true;
+                        B_Despachar.Visible = false;
+                        break;
+
+                    default:
+                        break;
+                }
+            }
         }
 
         private void B_Despachar_Click(object sender, EventArgs e)
         {
-            /*
-            if (seccionActual == "Ventas")
-            {
-                if (DGV_DatosPersonal.SelectedRows.Count > 0)
-                {
-                    string idProducto = DGV_DatosPersonal.SelectedRows[0].Cells["IdProducto"].Value.ToString();
-                    int cantidadVenta = Convert.ToInt32(DGV_DatosPersonal.SelectedRows[0].Cells["Cantidad"].Value); // Cantidad vendida (a despachar)
-
-                    // Consulta para obtener el stock actual desde InventarioProducto
-                    int stockActual = 0;
-
-                    using (SqlConnection conn = new SqlConnection(connectionString))
-                    {
-                        conn.Open();
-                        string stockQuery = "SELECT Stock FROM InventarioProducto WHERE IdProducto = @IdProducto";
-                        SqlCommand cmd = new SqlCommand(stockQuery, conn);
-                        cmd.Parameters.AddWithValue("@IdProducto", idProducto);
-                        object result = cmd.ExecuteScalar();
-
-                        if (result != null)
-                        {
-                            stockActual = Convert.ToInt32(result);
-                        }
-                        conn.Close();
-                    }
-
-                    if (stockActual < cantidadVenta)
-                    {
-                        MessageBox.Show("No hay suficiente stock para despachar esa cantidad.");
-                        return;
-                    }
-
-                    // Si hay suficiente stock, actualizamos el inventario
-                    using (SqlConnection conn = new SqlConnection(connectionString))
-                    {
-                        conn.Open();
-                        string updateQuery = "UPDATE InventarioProducto SET Stock = Stock - @Cantidad WHERE IdProducto = @IdProducto";
-                        SqlCommand cmd = new SqlCommand(updateQuery, conn);
-                        cmd.Parameters.AddWithValue("@Cantidad", cantidadVenta);
-                        cmd.Parameters.AddWithValue("@IdProducto", idProducto);
-                        cmd.ExecuteNonQuery();
-                        conn.Close();
-
-                        MessageBox.Show("Producto despachado correctamente.");
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Seleccione un producto para despachar.");
-                }
-            }
-            */
             if (seccionActual == "Ventas")
             {
                 if (DGV_DatosPersonal.SelectedRows.Count > 0)
