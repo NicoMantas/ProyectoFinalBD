@@ -288,6 +288,8 @@ namespace ProyectoBD
                     {
                         using (SqlConnection conn = new SqlConnection(connectionString))
                         {
+                            try 
+                            { 
                             string deleteQuery = "DELETE FROM Persona WHERE IdPersona = @Id";
                             SqlCommand cmd = new SqlCommand(deleteQuery, conn);
                             cmd.Parameters.AddWithValue("@Id", idPersona);
@@ -296,6 +298,11 @@ namespace ProyectoBD
                             conn.Close();
                             MessageBox.Show("Persona eliminada.");
                             CargarDatosPersonas(); // refrescar tabla
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show("Ocurrio un error tratando violar algun argumento: " + ex.Message);
+                            }
                         }
                     }
                 }
@@ -313,6 +320,8 @@ namespace ProyectoBD
                     {
                         using (SqlConnection conn = new SqlConnection(connectionString))
                         {
+                            try
+                            { 
                             string deleteQuery = "DELETE FROM Proveedor WHERE IdProveedor = @IdProveedor";
                             SqlCommand cmd = new SqlCommand(deleteQuery, conn);
                             cmd.Parameters.AddWithValue("@IdProveedor", idProveedor);
@@ -321,6 +330,11 @@ namespace ProyectoBD
                             conn.Close();
                             MessageBox.Show("Proveedor eliminado.");
                             CargarDatosProveedores(); // refrescar tabla
+                            }
+                                catch (Exception ex)
+                                {
+                                MessageBox.Show("Ocurrio un error tratando violar algun argumento: " + ex.Message);
+                            }
                         }
                     }
                 }
@@ -338,14 +352,21 @@ namespace ProyectoBD
                     {
                         using (SqlConnection conn = new SqlConnection(connectionString))
                         {
-                            string deleteQuery = "DELETE FROM Categoria WHERE IdCategoria = @IdCategoria";
-                            SqlCommand cmd = new SqlCommand(deleteQuery, conn);
-                            cmd.Parameters.AddWithValue("@IdCategoria", idCategoria);
-                            conn.Open();
-                            cmd.ExecuteNonQuery();
-                            conn.Close();
-                            MessageBox.Show("Categoria eliminada.");
-                            CargarDatosCategorias(); // refrescar tabla
+                            try
+                            {
+                                string deleteQuery = "DELETE FROM Categoria WHERE IdCategoria = @IdCategoria";
+                                SqlCommand cmd = new SqlCommand(deleteQuery, conn);
+                                cmd.Parameters.AddWithValue("@IdCategoria", idCategoria);
+                                conn.Open();
+                                cmd.ExecuteNonQuery();
+                                conn.Close();
+                                MessageBox.Show("Categoria eliminada.");
+                                CargarDatosCategorias(); // refrescar tabla
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show("Ocurrio un error tratando violar algun argumento: " + ex.Message);
+                            }
                         }
                     }
                 }
@@ -363,6 +384,8 @@ namespace ProyectoBD
                     {
                         using (SqlConnection conn = new SqlConnection(connectionString))
                         {
+                            try 
+                            { 
                             string deleteQuery = "DELETE FROM InventarioProducto WHERE IdProducto = @IdProducto";
                             SqlCommand cmd = new SqlCommand(deleteQuery, conn);
                             cmd.Parameters.AddWithValue("@IdProducto", idProducto);
@@ -371,6 +394,11 @@ namespace ProyectoBD
                             conn.Close();
                             MessageBox.Show("Producto eliminado.");
                             CargarDatosInventario(); // refrescar tabla
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show("Ocurrio un error tratando violar algun argumento: " + ex.Message);
+                            }
                         }
                     }
                 }

@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
@@ -22,7 +23,96 @@ namespace ProyectoBD
         {
             InitializeComponent();
             B_GuardarCrear.Enabled = false;
+            TB_Telefono.KeyPress += TB_Telefono_KeyPress;
+            TB_Cedula.KeyPress += TB_Cedula_KeyPress;
+            TB_Nombre.KeyPress += TB_Nombre_KeyPress;
+            TB_Email.Leave += TB_Email_Leave;
+            TB_Contraseña.Leave += TB_Contraseña_Leave;
+            TB_Telefono.Leave += TB_Telefono_Leave;
+
+
+
         }
+
+        private void TB_Email_Leave(object sender, EventArgs e)
+        {
+            string email_form = TB_Email.Text.Trim();
+            // Expresión regular para validar el formato del correo
+            string patronCorreo = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
+
+            if (!Regex.IsMatch(email_form, patronCorreo))
+            {
+                MessageBox.Show("Por favor, ingresa un correo electrónico válido.");
+                TB_Email.Focus(); // Enfocar el campo para que el usuario lo corrija
+                B_GuardarCrear.Enabled = false; // Deshabilitar el botón hasta que el correo sea válido
+            }
+            else
+            {
+                ValidarCampos(); // Verifica que todos los campos sean válidos
+            }
+        }
+
+
+        private void TB_Telefono_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true; // Bloquea caracteres no numéricos
+            }
+        }
+
+        private void TB_Cedula_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true; // Bloquea caracteres no numéricos
+            }
+        }
+
+        private void TB_Nombre_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Permitir letras, espacio y teclas de control (como backspace)
+            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar) && !char.IsWhiteSpace(e.KeyChar))
+            {
+                e.Handled = true; // Bloquea todo lo que no sea letra, espacio o control
+            }
+        }
+
+        private void TB_Contraseña_Leave(object sender, EventArgs e)
+        {
+            string contraseña_form = TB_Contraseña.Text;
+
+            // Validar que la contraseña tenga al menos 6 caracteres
+            if (contraseña_form.Length < 6)
+            {
+                MessageBox.Show("La contraseña debe tener al menos 6 caracteres.");
+                TB_Contraseña.Focus(); // Enfocar el campo para que el usuario lo corrija
+                B_GuardarCrear.Enabled = false; // Deshabilitar el botón hasta que la contraseña sea válida
+            }
+            else
+            {
+                ValidarCampos(); // Verificar que todos los campos sean válidos
+            }
+        }
+
+
+        private void TB_Telefono_Leave(object sender, EventArgs e)
+        {
+            string telefono_form = TB_Telefono.Text.Trim();
+
+            // Validar que el teléfono tenga al menos 9 caracteres
+            if (telefono_form.Length < 9)
+            {
+                MessageBox.Show("El teléfono debe tener al menos 9 caracteres.");
+                TB_Telefono.Focus(); // Enfocar el campo para que el usuario lo corrija
+                B_GuardarCrear.Enabled = false; // Deshabilitar el botón hasta que el teléfono sea válido
+            }
+            else
+            {
+                ValidarCampos(); // Verificar que todos los campos sean válidos
+            }
+        }
+
 
         private void F_Registro_Load(object sender, EventArgs e)
         {
@@ -55,6 +145,7 @@ namespace ProyectoBD
                 }
             }
         }
+
 
         public bool CrearPersona()
         {

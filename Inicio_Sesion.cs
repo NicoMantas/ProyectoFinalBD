@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.Data.SqlClient;
@@ -23,8 +24,47 @@ namespace ProyectoBD
         {
             InitializeComponent();
             B_InicioSesion.Enabled = false;
+            TB_email.Leave += new EventHandler(TB_email_Leave);
+            TB_contraseña.Leave += new EventHandler(TB_contraseña_Leave);
 
         }
+
+        // Validación cuando el correo pierde el foco
+        private void TB_email_Leave(object sender, EventArgs e)
+        {
+            string email_form = TB_email.Text.Trim();
+            // Expresión regular para validar el formato del correo
+            string patronCorreo = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
+
+            if (!Regex.IsMatch(email_form, patronCorreo))
+            {
+                MessageBox.Show("Por favor, ingresa un correo electrónico válido.");
+                TB_email.Focus(); // Enfocar el campo para que el usuario lo corrija
+                B_InicioSesion.Enabled = false; // Deshabilitar el botón hasta que el correo sea válido
+            }
+            else
+            {
+                ValidarCampos();
+            }
+        }
+
+        // Validación cuando la contraseña pierde el foco
+        private void TB_contraseña_Leave(object sender, EventArgs e)
+        {
+            string contraseña_form = TB_contraseña.Text;
+
+            if (contraseña_form.Length < 6)
+            {
+                MessageBox.Show("La contraseña debe tener al menos 6 caracteres.");
+                TB_contraseña.Focus(); // Enfocar el campo para que el usuario lo corrija
+                B_InicioSesion.Enabled = false; // Deshabilitar el botón hasta que la contraseña sea válida
+            }
+            else
+            {
+                ValidarCampos();
+            }
+        }
+
 
         private void F_InicioSesion_Load(object sender, EventArgs e)
         {
@@ -33,17 +73,21 @@ namespace ProyectoBD
 
         public bool ValidarCampos()
         {
-            if (!string.IsNullOrWhiteSpace(TB_contraseña.Text) && !string.IsNullOrWhiteSpace(TB_email.Text))
-            {
-                B_InicioSesion.Enabled = true;
-                return true;
-            }
-            else
+            string email_form = TB_email.Text.Trim();
+            string contraseña_form = TB_contraseña.Text;
+
+            // Validación de que no esté vacío
+            if (string.IsNullOrWhiteSpace(contraseña_form) || string.IsNullOrWhiteSpace(email_form))
             {
                 B_InicioSesion.Enabled = false;
                 return false;
             }
+
+            // Si ambos campos son válidos, habilitar el botón
+            B_InicioSesion.Enabled = true;
+            return true;
         }
+
 
         public bool ValidarCredenciales(out string rolUsuario)
         {
@@ -54,12 +98,11 @@ namespace ProyectoBD
 
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
-                // Cambié la consulta para traer el rol del usuario
                 string query = @"
-                                SELECT R.Descripcion 
-                                FROM Persona P
-                                JOIN Rol R ON P.IdRol = R.IdRol
-                                WHERE P.Email = @Email AND P.Contraseña = @Contraseña";
+                        SELECT R.Descripcion 
+                        FROM Persona P
+                        JOIN Rol R ON P.IdRol = R.IdRol
+                        WHERE P.Email = @Email AND P.Contraseña = @Contraseña";
                 SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@Email", email_form);
                 cmd.Parameters.AddWithValue("@Contraseña", contraseña_form);
@@ -71,7 +114,11 @@ namespace ProyectoBD
                     if (reader.Read())
                     {
                         credencialesValidas = true;
-                        rolUsuario = reader["Descripcion"].ToString(); // Aquí obtenemos el rol
+                        rolUsuario = reader["Descripcion"].ToString(); // Obtener el rol
+                    }
+                    else
+                    {
+                        MessageBox.Show("Las credenciales no son válidas.");
                     }
                 }
                 catch (Exception ex)
