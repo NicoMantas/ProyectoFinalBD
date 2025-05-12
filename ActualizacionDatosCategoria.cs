@@ -27,6 +27,16 @@ namespace ProyectoBD
             InitializeComponent();
             this.mostrar_idcategoria = idCategoria;
             this.mostrar_descripcion = descripcion;
+            TB_Descripcion.KeyPress += TB_Descripcion_KeyPress;
+        }
+
+        private void TB_Descripcion_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Permitir letras, espacio y teclas de control (como backspace)
+            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar) && !char.IsWhiteSpace(e.KeyChar))
+            {
+                e.Handled = true; // Bloquea todo lo que no sea letra, espacio o control
+            }
         }
 
         public void TraerDatos()

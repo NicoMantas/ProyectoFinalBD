@@ -21,6 +21,66 @@ namespace ProyectoBD
             InitializeComponent();
             GenerarSiguienteIdProducto();
             TB_IDProducto.ReadOnly = true;
+            TB_Nombre.KeyPress += TB_Nombre_KeyPress;
+            TB_Stock.KeyPress += TB_Numero_KeyPress;
+            TB_Precio.KeyPress += TB_Numero_KeyPress;
+            TB_Stock.Leave += TB_Numero_stock_Leave;
+            TB_Precio.Leave += TB_Numero_precio_Leave;
+        }
+
+        private void TB_Numero_stock_Leave(object sender, EventArgs e)
+        {
+            if (int.TryParse(TB_Stock.Text.Trim(), out int numero))
+            {
+                if (numero <= 0)
+                {
+                    MessageBox.Show("El número debe ser mayor que cero.");
+                    TB_Stock.Focus(); // Vuelve a enfocar para corregir
+                    B_Actualizar.Enabled = false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Ingrese un número válido.");
+                TB_Stock.Focus();
+                B_Actualizar.Enabled = false;
+            }
+        }
+        private void TB_Numero_precio_Leave(object sender, EventArgs e)
+        {
+            if (int.TryParse(TB_Precio.Text.Trim(), out int numero))
+            {
+                if (numero <= 0)
+                {
+                    MessageBox.Show("El número debe ser mayor que cero.");
+                    TB_Precio.Focus(); // Vuelve a enfocar para corregir
+                    B_Actualizar.Enabled = false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Ingrese un número válido.");
+                TB_Precio.Focus();
+                B_Actualizar.Enabled = false;
+            }
+        }
+
+
+        private void TB_Numero_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true; // Bloquea caracteres no numéricos
+            }
+        }
+
+        private void TB_Nombre_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Permitir letras, espacio y teclas de control (como backspace)
+            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar) && !char.IsWhiteSpace(e.KeyChar))
+            {
+                e.Handled = true; // Bloquea todo lo que no sea letra, espacio o control
+            }
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)

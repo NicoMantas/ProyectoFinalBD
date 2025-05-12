@@ -20,6 +20,16 @@ namespace ProyectoBD
             InitializeComponent();
             GenerarSiguienteIDCategoria();
             TB_IDCategoria.ReadOnly = true;
+            TB_Descripcion.KeyPress += TB_Descripcion_KeyPress;
+        }
+
+        private void TB_Descripcion_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Permitir letras, espacio y teclas de control (como backspace)
+            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar) && !char.IsWhiteSpace(e.KeyChar))
+            {
+                e.Handled = true; // Bloquea todo lo que no sea letra, espacio o control
+            }
         }
 
         private void B_Cancelar_Click(object sender, EventArgs e)

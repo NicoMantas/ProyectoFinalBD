@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.Data.SqlClient;
@@ -30,9 +31,53 @@ namespace ProyectoBD
             this.mostrar_email = email;
             this.mostrar_telefono = telefono;
             this.mostrar_idRol = idRol;
+            TB_Nombre.KeyPress += TB_Nombre_KeyPress;
+            TB_Telefono.KeyPress += TB_Telefono_KeyPress;
+            TB_Telefono.Leave += TB_Telefono_Leave;
+            TB_Email.Leave += TB_Email_Leave;
         }
 
+        private void TB_Nombre_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Permitir letras, espacio y teclas de control (como backspace)
+            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar) && !char.IsWhiteSpace(e.KeyChar))
+            {
+                e.Handled = true; // Bloquea todo lo que no sea letra, espacio o control
+            }
+        }
+        private void TB_Telefono_Leave(object sender, EventArgs e)
+        {
+            string telefono_form = TB_Telefono.Text.Trim();
 
+            // Validar que el teléfono tenga al menos 9 caracteres
+            if (telefono_form.Length < 9)
+            {
+                MessageBox.Show("El teléfono debe tener al menos 9 caracteres.");
+                TB_Telefono.Focus(); // Enfocar el campo para que el usuario lo corrija
+                B_GuardarActualizacionPersona.Enabled = false; // Deshabilitar el botón hasta que el teléfono sea válido
+            }
+        }
+
+        private void TB_Telefono_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true; // Bloquea caracteres no numéricos
+            }
+        }
+        private void TB_Email_Leave(object sender, EventArgs e)
+        {
+            string email_form = TB_Email.Text.Trim();
+            // Expresión regular para validar el formato del correo
+            string patronCorreo = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
+
+            if (!Regex.IsMatch(email_form, patronCorreo))
+            {
+                MessageBox.Show("Por favor, ingresa un correo electrónico válido.");
+                TB_Email.Focus(); // Enfocar el campo para que el usuario lo corrija
+                B_GuardarActualizacionPersona.Enabled = false; // Deshabilitar el botón hasta que el correo sea válido
+            }
+        }
 
         private void label6_Click(object sender, EventArgs e)
         {
