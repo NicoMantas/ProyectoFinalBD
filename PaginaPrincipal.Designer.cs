@@ -30,6 +30,8 @@
         {
             label1 = new Label();
             P_DatosPersonal = new Panel();
+            TB_Consulta = new TextBox();
+            B_Consulta = new Button();
             B_Despachar = new Button();
             B_AgregarDatos = new Button();
             B_EliminarDatos = new Button();
@@ -58,6 +60,8 @@
             // 
             // P_DatosPersonal
             // 
+            P_DatosPersonal.Controls.Add(TB_Consulta);
+            P_DatosPersonal.Controls.Add(B_Consulta);
             P_DatosPersonal.Controls.Add(B_Despachar);
             P_DatosPersonal.Controls.Add(B_AgregarDatos);
             P_DatosPersonal.Controls.Add(B_EliminarDatos);
@@ -69,9 +73,26 @@
             P_DatosPersonal.TabIndex = 1;
             P_DatosPersonal.Paint += P_DatosPersonal_Paint;
             // 
+            // TB_Consulta
+            // 
+            TB_Consulta.Location = new Point(896, 105);
+            TB_Consulta.Name = "TB_Consulta";
+            TB_Consulta.Size = new Size(254, 31);
+            TB_Consulta.TabIndex = 6;
+            // 
+            // B_Consulta
+            // 
+            B_Consulta.Location = new Point(919, 142);
+            B_Consulta.Name = "B_Consulta";
+            B_Consulta.Size = new Size(202, 46);
+            B_Consulta.TabIndex = 5;
+            B_Consulta.Text = "Consultar";
+            B_Consulta.UseVisualStyleBackColor = true;
+            B_Consulta.Click += B_ConsultaPersona_Click;
+            // 
             // B_Despachar
             // 
-            B_Despachar.Location = new Point(920, 361);
+            B_Despachar.Location = new Point(920, 406);
             B_Despachar.Name = "B_Despachar";
             B_Despachar.Size = new Size(207, 42);
             B_Despachar.TabIndex = 4;
@@ -81,7 +102,7 @@
             // 
             // B_AgregarDatos
             // 
-            B_AgregarDatos.Location = new Point(919, 149);
+            B_AgregarDatos.Location = new Point(919, 194);
             B_AgregarDatos.Name = "B_AgregarDatos";
             B_AgregarDatos.Size = new Size(208, 48);
             B_AgregarDatos.TabIndex = 3;
@@ -91,7 +112,7 @@
             // 
             // B_EliminarDatos
             // 
-            B_EliminarDatos.Location = new Point(920, 301);
+            B_EliminarDatos.Location = new Point(920, 346);
             B_EliminarDatos.Name = "B_EliminarDatos";
             B_EliminarDatos.Size = new Size(207, 42);
             B_EliminarDatos.TabIndex = 2;
@@ -101,7 +122,7 @@
             // 
             // B_ActualizarPersona
             // 
-            B_ActualizarPersona.Location = new Point(919, 221);
+            B_ActualizarPersona.Location = new Point(919, 266);
             B_ActualizarPersona.Name = "B_ActualizarPersona";
             B_ActualizarPersona.Size = new Size(208, 48);
             B_ActualizarPersona.TabIndex = 1;
@@ -206,6 +227,7 @@
             Text = "PaginaPrincipal";
             Load += F_PaginaPrincipal_Load;
             P_DatosPersonal.ResumeLayout(false);
+            P_DatosPersonal.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)DGV_DatosPersonal).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -227,5 +249,7 @@
         private Button B_ActualizarPersona;
         private Button B_AgregarDatos;
         private Button B_Despachar;
+        private Button B_Consulta;
+        private TextBox TB_Consulta;
     }
 }

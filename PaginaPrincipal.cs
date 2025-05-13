@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.Data.SqlClient;
 using static System.Collections.Specialized.BitVector32;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace ProyectoBD
 {
@@ -288,16 +289,16 @@ namespace ProyectoBD
                     {
                         using (SqlConnection conn = new SqlConnection(connectionString))
                         {
-                            try 
-                            { 
-                            string deleteQuery = "DELETE FROM Persona WHERE IdPersona = @Id";
-                            SqlCommand cmd = new SqlCommand(deleteQuery, conn);
-                            cmd.Parameters.AddWithValue("@Id", idPersona);
-                            conn.Open();
-                            cmd.ExecuteNonQuery();
-                            conn.Close();
-                            MessageBox.Show("Persona eliminada.");
-                            CargarDatosPersonas(); // refrescar tabla
+                            try
+                            {
+                                string deleteQuery = "DELETE FROM Persona WHERE IdPersona = @Id";
+                                SqlCommand cmd = new SqlCommand(deleteQuery, conn);
+                                cmd.Parameters.AddWithValue("@Id", idPersona);
+                                conn.Open();
+                                cmd.ExecuteNonQuery();
+                                conn.Close();
+                                MessageBox.Show("Persona eliminada.");
+                                CargarDatosPersonas(); // refrescar tabla
                             }
                             catch (Exception ex)
                             {
@@ -321,18 +322,18 @@ namespace ProyectoBD
                         using (SqlConnection conn = new SqlConnection(connectionString))
                         {
                             try
-                            { 
-                            string deleteQuery = "DELETE FROM Proveedor WHERE IdProveedor = @IdProveedor";
-                            SqlCommand cmd = new SqlCommand(deleteQuery, conn);
-                            cmd.Parameters.AddWithValue("@IdProveedor", idProveedor);
-                            conn.Open();
-                            cmd.ExecuteNonQuery();
-                            conn.Close();
-                            MessageBox.Show("Proveedor eliminado.");
-                            CargarDatosProveedores(); // refrescar tabla
+                            {
+                                string deleteQuery = "DELETE FROM Proveedor WHERE IdProveedor = @IdProveedor";
+                                SqlCommand cmd = new SqlCommand(deleteQuery, conn);
+                                cmd.Parameters.AddWithValue("@IdProveedor", idProveedor);
+                                conn.Open();
+                                cmd.ExecuteNonQuery();
+                                conn.Close();
+                                MessageBox.Show("Proveedor eliminado.");
+                                CargarDatosProveedores(); // refrescar tabla
                             }
-                                catch (Exception ex)
-                                {
+                            catch (Exception ex)
+                            {
                                 MessageBox.Show("Ocurrio un error tratando violar algun argumento: " + ex.Message);
                             }
                         }
@@ -384,16 +385,16 @@ namespace ProyectoBD
                     {
                         using (SqlConnection conn = new SqlConnection(connectionString))
                         {
-                            try 
-                            { 
-                            string deleteQuery = "DELETE FROM InventarioProducto WHERE IdProducto = @IdProducto";
-                            SqlCommand cmd = new SqlCommand(deleteQuery, conn);
-                            cmd.Parameters.AddWithValue("@IdProducto", idProducto);
-                            conn.Open();
-                            cmd.ExecuteNonQuery();
-                            conn.Close();
-                            MessageBox.Show("Producto eliminado.");
-                            CargarDatosInventario(); // refrescar tabla
+                            try
+                            {
+                                string deleteQuery = "DELETE FROM InventarioProducto WHERE IdProducto = @IdProducto";
+                                SqlCommand cmd = new SqlCommand(deleteQuery, conn);
+                                cmd.Parameters.AddWithValue("@IdProducto", idProducto);
+                                conn.Open();
+                                cmd.ExecuteNonQuery();
+                                conn.Close();
+                                MessageBox.Show("Producto eliminado.");
+                                CargarDatosInventario(); // refrescar tabla
                             }
                             catch (Exception ex)
                             {
@@ -638,6 +639,130 @@ namespace ProyectoBD
                 }
             }
         }
+
+        private void B_ConsultaPersona_Click(object sender, EventArgs e)
+        {
+            if(seccionActual == "Persona")
+            {
+                string email = TB_Consulta.Text;  // Suponiendo que TB_Email es el TextBox donde el usuario ingresa el email
+                CargarDatosPersonaPorEmail(email);
+            }else if(seccionActual == "Ventas")
+            {
+                // Obtener el texto del TextBox y dividirlo por el delimitador
+                string[] fechas = TB_Consulta.Text.Split('-');  // Utilizamos el guion como delimitador entre las fechas
+
+                if (fechas.Length == 2)
+                {
+                    try
+                    {
+                        DateTime fechaInicio = Convert.ToDateTime(fechas[0].Trim());  // Convertir la primera fecha (FechaInicio)
+                        DateTime fechaFin = Convert.ToDateTime(fechas[1].Trim());     // Convertir la segunda fecha (FechaFin)
+
+                        // Limpiar el TextBox
+                        TB_Consulta.Clear();
+
+                        // Llamar al método para cargar los datos
+                        CargarDatosVentasPorFecha(fechaInicio, fechaFin);
+                    }
+                    catch (FormatException)
+                    {
+                        MessageBox.Show("Por favor, ingrese las fechas en el formato correcto: 'yyyy-MM-dd - yyyy-MM-dd'.");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Por favor, ingrese las fechas separadas por un guion: 'FechaInicio - FechaFin'.");
+                }
+            }
+        }
+
+        private void CargarDatosPersonaPorEmail(string email)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    conn.Open();
+                    // La consulta SQL ahora filtra por el campo Email
+                    string query = @"
+                SELECT p.IdPersona, p.Nombre, p.Email, r.Descripcion AS Rol
+                FROM Persona p
+                INNER JOIN Rol r ON p.IdRol = r.IdRol
+                WHERE p.Email = @Email";  // Filtramos por Email
+
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@Email", email); // Parámetro para la consulta
+
+                    SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                    DataTable tabla = new DataTable();
+                    adapter.Fill(tabla);
+
+                    if (tabla.Rows.Count > 0)
+                    {
+                        // Si hay resultados, asignamos los datos al DataGridView
+                        DGV_DatosPersonal.DataSource = tabla;
+                        TB_Consulta.Clear();
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se encontraron datos para el email proporcionado.");
+                        TB_Consulta.Clear();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al cargar datos: " + ex.Message);
+                }
+            }
+        }
+
+        private void CargarDatosVentasPorFecha(DateTime fechaInicio, DateTime fechaFin)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    conn.Open();
+                    // La consulta SQL ahora filtra por el rango de fechas
+                    string query = @"
+                SELECT 
+                    V.IdVenta,
+                    V.FechaVenta,
+                    V.Cliente,
+                    V.IdPersona,
+                    DV.IdDetalleVenta,
+                    DV.IdProducto,
+                    DV.Cantidad
+                FROM Venta V
+                INNER JOIN DetalleVenta DV ON V.IdVenta = DV.IdVenta
+                WHERE V.FechaVenta BETWEEN @FechaInicio AND @FechaFin";  // Filtramos por fecha
+
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@FechaInicio", fechaInicio);
+                    cmd.Parameters.AddWithValue("@FechaFin", fechaFin);
+
+                    SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                    DataTable tabla = new DataTable();
+                    adapter.Fill(tabla);
+
+                    if (tabla.Rows.Count > 0)
+                    {
+                        // Si hay resultados, asignamos los datos al DataGridView
+                        DGV_DatosPersonal.DataSource = tabla;
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se encontraron datos para las fechas proporcionadas.");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al cargar datos: " + ex.Message);
+                }
+            }
+        }
+
+
 
     }
 }
