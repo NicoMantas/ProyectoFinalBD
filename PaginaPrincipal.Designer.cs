@@ -44,6 +44,7 @@
             B_Ventas = new Button();
             B_Proveedores = new Button();
             button1 = new Button();
+            B_InventarioBajo = new Button();
             P_DatosPersonal.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)DGV_DatosPersonal).BeginInit();
             SuspendLayout();
@@ -60,6 +61,7 @@
             // 
             // P_DatosPersonal
             // 
+            P_DatosPersonal.Controls.Add(B_InventarioBajo);
             P_DatosPersonal.Controls.Add(TB_Consulta);
             P_DatosPersonal.Controls.Add(B_Consulta);
             P_DatosPersonal.Controls.Add(B_Despachar);
@@ -209,6 +211,16 @@
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
+            // B_InventarioBajo
+            // 
+            B_InventarioBajo.Location = new Point(919, 51);
+            B_InventarioBajo.Name = "B_InventarioBajo";
+            B_InventarioBajo.Size = new Size(195, 38);
+            B_InventarioBajo.TabIndex = 7;
+            B_InventarioBajo.Text = "Ver Inventario Bajo";
+            B_InventarioBajo.UseVisualStyleBackColor = true;
+            B_InventarioBajo.Click += B_InventarioBajo_Click;
+            // 
             // F_PaginaPrincipal
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
@@ -251,5 +263,6 @@
         private Button B_Despachar;
         private Button B_Consulta;
         private TextBox TB_Consulta;
+        private Button B_InventarioBajo;
     }
 }

@@ -493,6 +493,9 @@ namespace ProyectoBD
                         B_ActualizarPersona.Visible = true;
                         B_EliminarDatos.Visible = false;
                         B_Despachar.Visible = false;
+                        B_InventarioBajo.Visible = true;
+                        B_Consulta.Visible = false;
+                        TB_Consulta.Visible = false;
                         break;
 
                     case "Ventas":
@@ -500,6 +503,9 @@ namespace ProyectoBD
                         B_AgregarDatos.Visible = false;
                         B_ActualizarPersona.Visible = false;
                         B_EliminarDatos.Visible = false;
+                        B_InventarioBajo.Visible = false;
+                        B_Consulta.Visible = true;
+                        TB_Consulta.Visible = true;
                         break;
 
                     case "Proveedor":
@@ -507,12 +513,18 @@ namespace ProyectoBD
                         B_ActualizarPersona.Visible = false;
                         B_EliminarDatos.Visible = false;
                         B_Despachar.Visible = false;
+                        B_InventarioBajo.Visible = false;
+                        B_Consulta.Visible = false;
+                        TB_Consulta.Visible = false;
                         break;
                     case "Categoria":
                         B_AgregarDatos.Visible = false;
                         B_ActualizarPersona.Visible = false;
                         B_EliminarDatos.Visible = false;
                         B_Despachar.Visible = false;
+                        B_InventarioBajo.Visible = false;
+                        B_Consulta.Visible = false;
+                        TB_Consulta.Visible = false;
                         break;
 
                     default:
@@ -528,6 +540,9 @@ namespace ProyectoBD
                         B_ActualizarPersona.Visible = true;
                         B_EliminarDatos.Visible = true;
                         B_Despachar.Visible = false;
+                        B_InventarioBajo.Visible = false;
+                        B_Consulta.Visible = true;
+                        TB_Consulta.Visible = true;
                         break;
 
                     case "Inventario":
@@ -535,6 +550,9 @@ namespace ProyectoBD
                         B_ActualizarPersona.Visible = true;
                         B_EliminarDatos.Visible = true;
                         B_Despachar.Visible = false;
+                        B_InventarioBajo.Visible = true;
+                        B_Consulta.Visible = false;
+                        TB_Consulta.Visible = false;
                         break;
 
                     case "Ventas":
@@ -542,6 +560,9 @@ namespace ProyectoBD
                         B_AgregarDatos.Visible = false;
                         B_ActualizarPersona.Visible = false;
                         B_EliminarDatos.Visible = false;
+                        B_InventarioBajo.Visible = false;
+                        B_Consulta.Visible = true;
+                        TB_Consulta.Visible = true;
                         break;
 
                     case "Proveedor":
@@ -549,12 +570,18 @@ namespace ProyectoBD
                         B_ActualizarPersona.Visible = true;
                         B_EliminarDatos.Visible = true;
                         B_Despachar.Visible = false;
+                        B_InventarioBajo.Visible = false;
+                        B_Consulta.Visible = false;
+                        TB_Consulta.Visible = false;
                         break;
                     case "Categoria":
                         B_AgregarDatos.Visible = true;
                         B_ActualizarPersona.Visible = true;
                         B_EliminarDatos.Visible = true;
                         B_Despachar.Visible = false;
+                        B_InventarioBajo.Visible = false;
+                        B_Consulta.Visible = false;
+                        TB_Consulta.Visible = false;
                         break;
 
                     default:
@@ -565,6 +592,8 @@ namespace ProyectoBD
 
         private void B_Despachar_Click(object sender, EventArgs e)
         {
+            //Codigo Bueno
+            /*
             if (seccionActual == "Ventas")
             {
                 if (DGV_DatosPersonal.SelectedRows.Count > 0)
@@ -638,15 +667,90 @@ namespace ProyectoBD
                     MessageBox.Show("Seleccione un producto para despachar.");
                 }
             }
+            */
+
+            if (seccionActual == "Ventas")
+            {
+                if (DGV_DatosPersonal.SelectedRows.Count > 0)
+                {
+                    string idProducto = DGV_DatosPersonal.SelectedRows[0].Cells["IdProducto"].Value.ToString();
+                    int cantidadVenta = Convert.ToInt32(DGV_DatosPersonal.SelectedRows[0].Cells["Cantidad"].Value);
+                    string idDetalleVenta = DGV_DatosPersonal.SelectedRows[0].Cells["IdDetalleVenta"].Value.ToString();
+
+                    int stockActual = 0;
+
+                    using (SqlConnection conn = new SqlConnection(connectionString))
+                    {
+                        conn.Open();
+                        string stockQuery = "SELECT Stock FROM InventarioProducto WHERE IdProducto = @IdProducto";
+                        SqlCommand cmd = new SqlCommand(stockQuery, conn);
+                        cmd.Parameters.AddWithValue("@IdProducto", idProducto);
+                        object result = cmd.ExecuteScalar();
+
+                        if (result != null)
+                        {
+                            stockActual = Convert.ToInt32(result);
+                        }
+                        conn.Close();
+                    }
+
+                    if (stockActual < cantidadVenta)
+                    {
+                        MessageBox.Show("No hay suficiente stock para despachar esa cantidad.");
+                        return;
+                    }
+
+                    using (SqlConnection conn = new SqlConnection(connectionString))
+                    {
+                        conn.Open();
+                        SqlTransaction transaction = conn.BeginTransaction();
+
+                        try
+                        {
+                            // ✅ Usar procedimiento almacenado para actualizar stock
+                            SqlCommand cmdSP = new SqlCommand("SP_ActualizarStockProducto", conn, transaction);
+                            cmdSP.CommandType = CommandType.StoredProcedure;
+                            cmdSP.Parameters.AddWithValue("@IdProducto", Convert.ToInt32(idProducto));
+                            cmdSP.Parameters.AddWithValue("@cantidadVendida", cantidadVenta);
+                            cmdSP.ExecuteNonQuery();
+
+                            // ❌ Ya no usamos el updateQuery aquí
+                            // ✅ Eliminar el registro de detalle de venta
+                            string deleteQuery = "DELETE FROM DetalleVenta WHERE IdDetalleVenta = @IdDetalleVenta";
+                            SqlCommand cmdDelete = new SqlCommand(deleteQuery, conn, transaction);
+                            cmdDelete.Parameters.AddWithValue("@IdDetalleVenta", idDetalleVenta);
+                            cmdDelete.ExecuteNonQuery();
+
+                            transaction.Commit();
+                            MessageBox.Show("Producto despachado y registro eliminado correctamente.");
+                        }
+                        catch (Exception ex)
+                        {
+                            transaction.Rollback();
+                            MessageBox.Show("Error al despachar producto: " + ex.Message);
+                        }
+
+                        conn.Close();
+                    }
+
+                    CargarDatosVentas(); // Refresca la tabla
+                }
+                else
+                {
+                    MessageBox.Show("Seleccione un producto para despachar.");
+                }
+            }
+
         }
 
         private void B_ConsultaPersona_Click(object sender, EventArgs e)
         {
-            if(seccionActual == "Persona")
+            if (seccionActual == "Persona")
             {
                 string email = TB_Consulta.Text;  // Suponiendo que TB_Email es el TextBox donde el usuario ingresa el email
                 CargarDatosPersonaPorEmail(email);
-            }else if(seccionActual == "Ventas")
+            }
+            else if (seccionActual == "Ventas")
             {
                 // Obtener el texto del TextBox y dividirlo por el delimitador
                 string[] fechas = TB_Consulta.Text.Split('-');  // Utilizamos el guion como delimitador entre las fechas
@@ -762,8 +866,33 @@ namespace ProyectoBD
             }
         }
 
+        private void B_InventarioBajo_Click(object sender, EventArgs e)
+        {
+            int stockMinimo = 10; // Puedes obtener este valor desde un control NumericUpDown si lo deseas
 
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("SP_VerInventarioBajoStock", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@stockMinimo", stockMinimo);
 
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+
+                try
+                {
+                    conn.Open();
+                    adapter.Fill(dt);
+                    conn.Close();
+
+                    DGV_DatosPersonal.DataSource = dt; // Asignar al DataGridView
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al consultar el inventario bajo stock: " + ex.Message);
+                }
+            }
+        }
     }
 }
 
